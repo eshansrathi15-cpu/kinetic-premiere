@@ -78,7 +78,7 @@ const HeroSection = () => {
       }} className="mt-8 inline-flex items-center">
           <div className="ticket-perf w-3 h-16 bg-primary" />
           <div className="bg-primary text-primary-foreground px-8 py-4 font-mono relative">
-            <div className="text-xs opacity-70 mb-1">ADMIT ONE</div>
+            <div className="text-xs opacity-70 mb-1">​Theater Timing </div>
             <div className="text-xl md:text-2xl font-bold tracking-wider">FEB 09 - 15</div>
             <div className="text-xs opacity-70 mt-1">BITS PILANI</div>
           </div>
@@ -146,7 +146,7 @@ const HeroSection = () => {
         duration: 1.5,
         repeat: Infinity
       }} className="">
-          <div className="w-1 h-2 bg-primary" />
+          
         </motion.div>
       </motion.div>
     </section>;
