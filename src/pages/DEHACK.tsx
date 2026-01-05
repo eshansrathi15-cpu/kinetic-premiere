@@ -1,3 +1,4 @@
+import { useEffect } from "react"; // Added this for scroll control
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Terminal, Cpu, Zap, Shield, Trophy, Calendar, Clock, MapPin, MessageSquare, HelpCircle, ChevronRight, Layers, Code, Lightbulb } from "lucide-react";
@@ -5,6 +6,11 @@ import WaveformBackground from "@/components/WaveformBackground";
 import { Button } from "@/components/ui/button";
 
 const Dehack = () => {
+  // FIX: Force scroll to top on page load
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -33,12 +39,14 @@ const Dehack = () => {
       <WaveformBackground />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
+        {/* Navigation */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
           <Link to="/" className="inline-flex items-center gap-2 text-primary hover:gap-4 transition-all duration-300 font-mono text-sm uppercase tracking-widest">
             <ArrowLeft className="w-4 h-4" /> Back to Command Center
           </Link>
         </motion.div>
 
+        {/* Hero Section */}
         <div className="grid lg:grid-cols-2 gap-16 items-start mb-24">
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
             <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 border border-primary/30 bg-primary/5 text-primary font-mono text-xs tracking-widest uppercase">
@@ -51,6 +59,7 @@ const Dehack = () => {
               Talk is Cheap. Build the future with BITS Pilani’s flagship 54-hour sprint where engineering meets entrepreneurship.
             </p>
             
+            {/* LOGISTICS GRID */}
             <div className="grid grid-cols-2 gap-8 pt-8 border-t border-primary/20">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-2 text-primary font-mono text-xs uppercase tracking-widest">
@@ -66,6 +75,7 @@ const Dehack = () => {
               </div>
             </div>
 
+            {/* HIGH-IMPACT PRIZE SECTION */}
             <motion.div 
               initial={{ scale: 0.9, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
@@ -82,6 +92,7 @@ const Dehack = () => {
             </motion.div>
           </motion.div>
 
+          {/* Manifesto Terminal */}
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} className="border-2 border-primary/20 bg-black/40 p-8 rounded-sm backdrop-blur-md relative">
             <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-primary" />
             <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-primary" />
@@ -108,6 +119,7 @@ const Dehack = () => {
           </motion.div>
         </div>
 
+        {/* EVENT TRACKS */}
         <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-24">
           <h2 className="text-3xl font-mono font-bold text-primary mb-10 flex items-center gap-3 italic">
             <Layers className="w-6 h-6" /> // DEHACK_SUB_EVENTS
@@ -128,6 +140,7 @@ const Dehack = () => {
           </div>
         </motion.div>
 
+        {/* FAQs */}
         <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-4xl">
           <h2 className="text-3xl font-mono font-bold text-primary mb-10 flex items-center gap-3 italic">
             <HelpCircle className="w-6 h-6" /> // SYSTEM_QUERY_v2.3
