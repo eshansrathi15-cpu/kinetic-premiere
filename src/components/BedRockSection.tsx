@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Crown, Users, TrendingUp, Award } from 'lucide-react';
-import { Link } from 'react-router-dom';
 const BedRockSection = () => {
   return <section className="py-24 relative overflow-hidden bg-secondary/20">
       {/* Award show style lighting */}
@@ -150,8 +149,8 @@ const BedRockSection = () => {
                 </motion.div>)}
             </div>
 
-            <Button variant="default" size="lg" className="text-lg" asChild>
-              <Link to="/bedrock">ASSEMBLE TEAM</Link>
+            <Button variant="default" size="lg" className="text-lg">
+              ASSEMBLE TEAM
             </Button>
           </motion.div>
         </div>
