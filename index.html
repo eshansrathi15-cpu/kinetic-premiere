@@ -22,7 +22,9 @@
 
   <body>
     <div id="root"></div>
-    <div id="movie-ticket-popup" class="ticket-hidden">
+    <div id="popup-overlay" class="ticket-hidden"></div> 
+
+<div id="movie-ticket-popup" class="ticket-hidden">
     <div class="ticket-body">
         <div class="ticket-header">
             <span class="ticket-admit">ADMIT ONE</span>
@@ -44,59 +46,43 @@
   <script>
 document.addEventListener('DOMContentLoaded', () => {
     const popup = document.getElementById('movie-ticket-popup');
+    const overlay = document.getElementById('popup-overlay'); // Get the overlay
     const closeBtn = document.getElementById('ticket-close-btn');
     const titleEl = document.getElementById('ticket-title');
     const descEl = document.getElementById('ticket-desc');
     let activeTile = null;
 
-    // --- UPDATED: REACT-SAFE CLICK LISTENER ---
-    // This listens to clicks on the whole body, catching them 
-    // even if React creates the elements later.
+    // --- OPEN POPUP ---
     document.body.addEventListener('click', (e) => {
         const tile = e.target.closest('.event-tile');
         
         if (tile) {
-            e.preventDefault(); // Stop React link navigation if any
+            e.preventDefault(); 
             e.stopPropagation();
             
             activeTile = tile;
             titleEl.textContent = tile.dataset.title || 'Event';
             descEl.textContent = tile.dataset.desc || 'Details coming soon.';
             
+            // Show Popup & Overlay (CSS handles the centering)
             popup.classList.remove('ticket-hidden');
-
-            // Desktop Positioning
-            if (window.innerWidth > 768) {
-                const rect = tile.getBoundingClientRect();
-                const scrollY = window.scrollY;
-                let leftPos = rect.right + 20;
-                let topPos = rect.top + scrollY;
-
-                if (leftPos + 450 > window.innerWidth) leftPos = rect.left - 470; 
-
-                popup.style.top = topPos + 'px';
-                popup.style.left = leftPos + 'px';
-            } else {
-                popup.style.top = '';
-                popup.style.left = '';
-            }
+            overlay.classList.remove('ticket-hidden');
         }
     });
 
     // --- CLOSE LOGIC ---
     const closePopup = () => {
         popup.classList.add('ticket-hidden');
+        overlay.classList.add('ticket-hidden'); // Hide overlay too
         activeTile = null;
     };
 
     closeBtn.addEventListener('click', closePopup);
+    overlay.addEventListener('click', closePopup); // Click background to close
 
-    document.addEventListener('click', (e) => {
-        if (!popup.classList.contains('ticket-hidden') && 
-            !popup.contains(e.target) && 
-            (!activeTile || !activeTile.contains(e.target))) {
-            closePopup();
-        }
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePopup();
     });
 
     // Mobile Swipe Logic
