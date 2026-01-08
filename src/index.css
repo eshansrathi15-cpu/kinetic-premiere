@@ -265,7 +265,8 @@
     from { opacity: 0; }
     to { opacity: 1; }
 }
-/* --- UPDATED: DESKTOP POSITIONING (Centered) --- */
+
+/* --- DESKTOP POSITIONING (Centered) --- */
 @media (min-width: 769px) {
     #movie-ticket-popup {
         position: fixed;            /* Fixed relative to screen, not scroll */
@@ -275,10 +276,10 @@
         
         width: 450px;
         flex-direction: row;
-        animation: ticketPopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy pop effect */
+        animation: ticketPopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         
         box-shadow: 0 20px 50px rgba(0,0,0,0.5), 
-                    0 0 30px rgba(94, 234, 212, 0.15); /* Stronger shadow for depth */
+                    0 0 30px rgba(94, 234, 212, 0.15);
     }
     
     .ticket-rip-line {
@@ -302,146 +303,127 @@
 @keyframes ticketPopIn {
     0% { opacity: 0; transform: translate(-50%, -45%) scale(0.95); }
     100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-};
-  
-  
-  .ticket-rip-line {
-      width: 2px;
-      border-right: 2px dashed #333;
-      margin: 0 20px;
-      position: relative;
-  }
-
-  .ticket-stub {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-width: 120px;
-      align-items: center;
-  }
-  
-  .mobile-swipe-hint { display: none; }
 }
-/* MOBILE POSITIONING */
+
+/* --- MOBILE POSITIONING --- */
 @media (max-width: 768px) {
-  #movie-ticket-popup {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      box-sizing: border-box;
-      flex-direction: column;
-      border-radius: 15px 15px 0 0;
-      border-bottom: none;
-      animation: slideUp 0.3s ease-out;
-      padding-bottom: 40px; /* Space for swipe handle */
-  }
+    #movie-ticket-popup {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        flex-direction: column;
+        border-radius: 15px 15px 0 0;
+        border-bottom: none;
+        animation: slideUp 0.3s ease-out;
+        padding-bottom: 40px; /* Space for swipe handle */
+    }
 
-  .ticket-rip-line {
-      height: 2px;
-      border-bottom: 2px dashed #333;
-      margin: 15px 0;
-  }
+    .ticket-rip-line {
+        height: 2px;
+        border-bottom: 2px dashed #333;
+        margin: 15px 0;
+    }
 
-  .ticket-stub {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      width: 100%;
-  }
+    .ticket-stub {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+    }
 
-  .mobile-swipe-hint {
-      font-size: 0.7rem;
-      color: #666;
-      margin-top: 5px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-  }
+    .mobile-swipe-hint {
+        font-size: 0.7rem;
+        color: #666;
+        margin-top: 5px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
 }
 
-/* CONTENT STYLES */
+/* --- CONTENT STYLES --- */
 .ticket-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .ticket-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #333;
-  padding-bottom: 8px;
-  margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 .ticket-admit {
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-  color: #666;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: #666;
 }
 
 #ticket-close-btn {
-  background: none;
-  border: none;
-  color: var(--ticket-cyan);
-  font-size: 1.5rem;
-  cursor: pointer;
-  line-height: 1;
-  padding: 0 10px;
+    background: none;
+    border: none;
+    color: var(--ticket-cyan);
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 10px;
 }
 
 #ticket-title {
-  color: var(--ticket-cyan);
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 1.1;
+    color: var(--ticket-cyan);
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.1;
 }
 
 #ticket-desc {
-  color: #ddd;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  margin: 0;
-  font-family: 'Space Grotesk', sans-serif; /* Use your body font */
+    color: #ddd;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 .register-btn {
-  background-color: var(--ticket-cyan);
-  color: #000;
-  padding: 12px 0;
-  width: 100%;
-  text-decoration: none;
-  font-weight: bold;
-  text-transform: uppercase;
-  border: 1px solid var(--ticket-cyan);
-  transition: all 0.2s;
-  text-align: center;
-  font-family: 'JetBrains Mono', monospace;
-  letter-spacing: 1px;
+    background-color: var(--ticket-cyan);
+    color: #000;
+    padding: 12px 0;
+    width: 100%;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid var(--ticket-cyan);
+    transition: all 0.2s;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 1px;
 }
 
 .register-btn:hover {
-  background-color: transparent;
-  color: var(--ticket-cyan);
+    background-color: transparent;
+    color: var(--ticket-cyan);
 }
 
-/* Optional: Highlight Active Card */
 .event-tile.active-card {
     border-color: var(--ticket-cyan) !important;
     box-shadow: 0 0 15px rgba(94, 234, 212, 0.3);
 }
 
 @keyframes ticketFadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
 }
