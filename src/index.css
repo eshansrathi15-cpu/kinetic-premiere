@@ -224,10 +224,13 @@
    ========================================= */
 
 /* Reuse your existing cyan variable or define local one */
+/* Reuse your existing cyan variable or define local one */
 :root {
-  --ticket-cyan: hsl(183, 100%, 75%); /* Matches your --primary */
-  --ticket-bg: #0a0a0a;
+  --ticket-cyan: hsl(183, 100%, 75%);
+  --ticket-bg: #1a1a1a;  /* <--- CHANGED: Dark Grey instead of Black */
   --ticket-border: #ffffff;
+  /* ADDED: A subtle white pattern color */
+  --ticket-pattern-white: rgba(255, 255, 255, 0.04);
 }
 
 .ticket-hidden {
@@ -252,33 +255,46 @@
     from { opacity: 0; }
     to { opacity: 1; }
 }
-/* --- 1. THE VISUALS (Corner Cuts & Glow) --- */
+/* --- 1. THE VISUALS (Corner Cuts, Glow, & Pattern) --- */
 #movie-ticket-popup {
-    /* Transparent background so we can draw the shape */
-    background-color: transparent;
+    /* Set the base color to the new dark grey */
+    background-color: var(--ticket-bg);
     
-    /* This creates the "Bite" holes in the 4 corners */
+    /* Layered Background Images */
     background-image: 
-        radial-gradient(circle at 0 0, transparent 20px, #0a0a0a 21px),
-        radial-gradient(circle at 100% 0, transparent 20px, #0a0a0a 21px),
-        radial-gradient(circle at 0 100%, transparent 20px, #0a0a0a 21px),
-        radial-gradient(circle at 100% 100%, transparent 20px, #0a0a0a 21px);
+        /* LAYER 1 (Top): The Corner Cutouts (Must match bg color) */
+        radial-gradient(circle at 0 0, transparent 20px, var(--ticket-bg) 21px),
+        radial-gradient(circle at 100% 0, transparent 20px, var(--ticket-bg) 21px),
+        radial-gradient(circle at 0 100%, transparent 20px, var(--ticket-bg) 21px),
+        radial-gradient(circle at 100% 100%, transparent 20px, var(--ticket-bg) 21px),
+        
+        /* LAYER 2 (Middle): Subtle White Technical/Grid Pattern */
+        linear-gradient(var(--ticket-pattern-white) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ticket-pattern-white) 1px, transparent 1px);
     
-    /* Fills the rest of the ticket with black */
-    background-size: 51% 51%;
-    background-position: top left, top right, bottom left, bottom right;
-    background-repeat: no-repeat;
+    /* Sizing the layers */
+    background-size: 
+        51% 51%, 51% 51%, 51% 51%, 51% 51%, /* Corner sizes */
+        20px 20px, 20px 20px; /* Pattern grid size */
+        
+    background-position: 
+        top left, top right, bottom left, bottom right, /* Corner positions */
+        center center, center center; /* Pattern position */
+        
+    background-repeat: 
+        no-repeat, no-repeat, no-repeat, no-repeat, /* Corners don't repeat */
+        repeat, repeat; /* Pattern repeats */
 
-    /* Remove standard border (it doesn't curve around holes) */
+    /* Remove standard border */
     border: none;
 
-    /* Cyan Glow that follows the ticket shape */
+    /* Cyan Glow */
     filter: drop-shadow(0 0 15px rgba(94, 234, 212, 0.3));
 
     color: #fff;
     font-family: 'JetBrains Mono', monospace;
     z-index: 99999;
-    padding: 30px; /* Extra padding to avoid text hitting the holes */
+    padding: 30px;
     display: flex;
 }
 
