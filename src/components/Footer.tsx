@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Film } from 'lucide-react';
 import celLogo from '@/assets/cel-logo.png';
 const Footer = () => {
   const [isLaunching, setIsLaunching] = useState(false);
@@ -37,7 +38,7 @@ const Footer = () => {
   return <footer className="py-16 border-t border-border relative bg-background">
       {/* Film credits style border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-6">
-        <img src={celLogo} alt="CEL Logo" className="w-6 h-6" />
+        <Film className="w-6 h-6 text-muted-foreground" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6">
