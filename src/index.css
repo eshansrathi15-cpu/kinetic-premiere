@@ -260,16 +260,16 @@
     
     /* Layered Background Images */
     background-image: 
-        /* LAYER 1 (Top): The Corner Cutouts (Must match bg color to hide content behind) */
+        /* LAYER 1 (Top): The Corner Cutouts */
         radial-gradient(circle at 0 0, transparent 20px, var(--ticket-bg) 21px),
         radial-gradient(circle at 100% 0, transparent 20px, var(--ticket-bg) 21px),
         radial-gradient(circle at 0 100%, transparent 20px, var(--ticket-bg) 21px),
         radial-gradient(circle at 100% 100%, transparent 20px, var(--ticket-bg) 21px),
         
-        /* LAYER 2: Popcorn Icon Pattern (Light White Tone) */
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8Z'/%3E%3Cpath d='M10 14h4'/%3E%3Cpath d='M12 12v4'/%3E%3C/svg%3E"),
+        /* LAYER 2: Popcorn Icon Pattern */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8Z'/%3E%3Cpath d='M10 14h4'/%3E%3Cpath d='M12 12v4'/%3E%3C/svg%3E"),
         
-        /* LAYER 3 (Bottom): Film Reel Icon Pattern (Light White Tone) */
+        /* LAYER 3 (Bottom): Film Reel Icon Pattern */
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M12 3h0'/%3E%3Cpath d='M16.5 4.5h0'/%3E%3Cpath d='M20 7.5h0'/%3E%3Cpath d='M21 12h0'/%3E%3Cpath d='M20 16.5h0'/%3E%3Cpath d='M16.5 19.5h0'/%3E%3Cpath d='M12 21h0'/%3E%3Cpath d='M7.5 19.5h0'/%3E%3Cpath d='M4 16.5h0'/%3E%3Cpath d='M3 12h0'/%3E%3Cpath d='M4 7.5h0'/%3E%3Cpath d='M7.5 4.5h0'/%3E%3Cpath d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3'/%3E%3C/svg%3E");
     
     /* Sizing the layers */
