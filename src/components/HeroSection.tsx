@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Play, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
 const HeroSection = () => {
   return <section className="min-h-screen flex flex-col items-center justify-center relative px-6 pt-20 spotlight vignette">
       {/* Cinema Curtain Accents */}
@@ -109,9 +111,14 @@ const HeroSection = () => {
         duration: 0.6,
         delay: 1.2
       }} className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="default" size="lg" className="text-lg px-8 py-6">
-            GET TICKETS
-          </Button>
+          
+          {/* LINKED BUTTON */}
+          <Link to="/tickets">
+            <Button variant="default" size="lg" className="text-lg px-8 py-6 w-full sm:w-auto">
+              GET TICKETS
+            </Button>
+          </Link>
+
           <Button variant="outline" size="lg" className="text-lg px-8 py-6">
             <Play className="w-5 h-5 mr-2" />
             WATCH TRAILER
