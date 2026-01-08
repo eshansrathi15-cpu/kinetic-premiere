@@ -479,28 +479,45 @@
 }
 
 @keyframes ticketFadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(50px) scale(0.9); /* Starts lower and smaller */
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
 }
 
 @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
+    0% { 
+        transform: translateY(100%); 
+    }
+    70% { 
+        /* Slides UP past the destination (negative Y is up) */
+        transform: translateY(-10%); 
+    }
+    100% { 
+        transform: translateY(0); 
+    }
 }
-/* --- ANIMATION KEYFRAMES --- */
 @keyframes ticketEntrance {
     0% {
         opacity: 0;
-        /* Starts slightly lower (-40%) and smaller (0.9) */
-        transform: translate(-50%, -40%) scale(0.9) rotate(-2deg);
+        /* Starts much smaller and tilted heavily */
+        transform: translate(-50%, -100%) scale(0.5) rotate(-15deg); 
     }
-    70% {
-        /* Overshoots slightly to create a "bounce" or "stamp" feel */
-        transform: translate(-50%, -51%) scale(1.02) rotate(1deg);
+    60% {
+        opacity: 1;
+        /* Big overshoot: Grows larger than life and swings past center */
+        transform: translate(-50%, -45%) scale(1.1) rotate(5deg);
+    }
+    80% {
+        /* A slight recoil to settle the energy */
+        transform: translate(-50%, -50%) scale(0.95) rotate(-2deg);
     }
     100% {
-        opacity: 1;
-        /* Lands perfectly centered */
+        /* Settle */
         transform: translate(-50%, -50%) scale(1) rotate(0deg);
     }
 }
