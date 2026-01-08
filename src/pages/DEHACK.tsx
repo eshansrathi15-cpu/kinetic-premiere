@@ -130,7 +130,7 @@ const Dehack = () => {
               <h2 className="text-5xl md:text-7xl font-mono font-black text-foreground tracking-tighter">
                 ₹1,00,000<span className="text-primary">+</span>
               </h2>
-              <p className="text-muted-foreground font-mono text-sm mt-2">Plus Incubation Opportunities, Cash Prizes, and Exclusive Merch.</p>
+              <p className="text-muted-foreground font-mono text-sm mt-2">Plus Incubation Opportunities, Cash Prizes.</p>
             </motion.div>
           </motion.div>
 
