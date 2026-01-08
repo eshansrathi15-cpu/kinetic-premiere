@@ -128,7 +128,7 @@ const BedRockSection = () => {
                 className="text-lg bg-primary text-black hover:bg-primary/90 font-bold px-10 py-8 tracking-widest uppercase shadow-[0_0_20px_rgba(147,245,255,0.2)]"
                 disabled={isGenerating}
               >
-                {isGenerating ? "BUILDING..." : "ASSEMBLE TEAM"}
+                {isGenerating ? "BUILDING..." : "PLOT REVEAL"}
               </Button>
               <Button 
                 variant="outline" 
