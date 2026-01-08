@@ -253,39 +253,64 @@
     from { opacity: 0; }
     to { opacity: 1; }
 }
-/* --- 1. THE VISUALS (Corner Cuts, Glow, & Icon Pattern) --- */
+/* --- 1. THE VISUALS (Corner Cuts, Glow, & Scattered Drawings) --- */
 #movie-ticket-popup {
-    /* Set the base color to dark grey */
-    background-color: var(--ticket-bg);
+    /* Base color provided by the bottom gradient layers */
+    background-color: transparent;
     
-    /* Layered Background Images */
     background-image: 
-        /* LAYER 1 (Top): The Corner Cutouts */
+        /* === TOP LAYER: SCATTERED ICONS === */
+        /* These are placed at specific random % positions (X Y) to look "scattered" */
+        
+        /* 1. Popcorn - Top Leftish */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8Z'/%3E%3Cpath d='M10 14h4'/%3E%3Cpath d='M12 12v4'/%3E%3C/svg%3E"),
+        
+        /* 2. Film Reel - Right Middle */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M12 3h0'/%3E%3Cpath d='M16.5 4.5h0'/%3E%3Cpath d='M20 7.5h0'/%3E%3Cpath d='M21 12h0'/%3E%3Cpath d='M20 16.5h0'/%3E%3Cpath d='M16.5 19.5h0'/%3E%3Cpath d='M12 21h0'/%3E%3Cpath d='M7.5 19.5h0'/%3E%3Cpath d='M4 16.5h0'/%3E%3Cpath d='M3 12h0'/%3E%3Cpath d='M4 7.5h0'/%3E%3Cpath d='M7.5 4.5h0'/%3E%3Cpath d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3'/%3E%3C/svg%3E"),
+        
+        /* 3. Popcorn - Bottom Right */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8Z'/%3E%3Cpath d='M10 14h4'/%3E%3Cpath d='M12 12v4'/%3E%3C/svg%3E"),
+
+        /* 4. Film Strip (Loose End) - Bottom Left */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12h20'/%3E%3Cpath d='M2 12c0 5 4 9 10 9s10-4 10-9'/%3E%3Cpath d='M4 12v-3'/%3E%3Cpath d='M8 12v-3'/%3E%3Cpath d='M12 12v-3'/%3E%3Cpath d='M16 12v-3'/%3E%3Cpath d='M20 12v-3'/%3E%3C/svg%3E"),
+        
+        /* 5. Film Reel - Top Center (Small) */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M12 3h0'/%3E%3Cpath d='M16.5 4.5h0'/%3E%3Cpath d='M20 7.5h0'/%3E%3Cpath d='M21 12h0'/%3E%3Cpath d='M20 16.5h0'/%3E%3Cpath d='M16.5 19.5h0'/%3E%3Cpath d='M12 21h0'/%3E%3Cpath d='M7.5 19.5h0'/%3E%3Cpath d='M4 16.5h0'/%3E%3Cpath d='M3 12h0'/%3E%3Cpath d='M4 7.5h0'/%3E%3Cpath d='M7.5 4.5h0'/%3E%3Cpath d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3'/%3E%3C/svg%3E"),
+
+
+        /* === BOTTOM LAYER: THE TICKET SHAPE (Grey Body + Corners) === */
+        /* These gradients draw the dark grey body but leave the corners transparent */
         radial-gradient(circle at 0 0, transparent 20px, var(--ticket-bg) 21px),
         radial-gradient(circle at 100% 0, transparent 20px, var(--ticket-bg) 21px),
         radial-gradient(circle at 0 100%, transparent 20px, var(--ticket-bg) 21px),
-        radial-gradient(circle at 100% 100%, transparent 20px, var(--ticket-bg) 21px),
-        
-        /* LAYER 2: Popcorn Icon Pattern */
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 8a2 2 0 0 0 0-4 2 2 0 0 0-4 0 2 2 0 0 0-4 0 2 2 0 0 0 0 4v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8Z'/%3E%3Cpath d='M10 14h4'/%3E%3Cpath d='M12 12v4'/%3E%3C/svg%3E"),
-        
-        /* LAYER 3 (Bottom): Film Reel Icon Pattern */
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M12 3h0'/%3E%3Cpath d='M16.5 4.5h0'/%3E%3Cpath d='M20 7.5h0'/%3E%3Cpath d='M21 12h0'/%3E%3Cpath d='M20 16.5h0'/%3E%3Cpath d='M16.5 19.5h0'/%3E%3Cpath d='M12 21h0'/%3E%3Cpath d='M7.5 19.5h0'/%3E%3Cpath d='M4 16.5h0'/%3E%3Cpath d='M3 12h0'/%3E%3Cpath d='M4 7.5h0'/%3E%3Cpath d='M7.5 4.5h0'/%3E%3Cpath d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3'/%3E%3C/svg%3E");
+        radial-gradient(circle at 100% 100%, transparent 20px, var(--ticket-bg) 21px);
     
-    /* Sizing the layers */
+    /* === SIZING & POSITIONING === */
     background-size: 
-        51% 51%, 51% 51%, 51% 51%, 51% 51%, /* Corner sizes */
-        80px 80px, /* Popcorn size */
-        100px 100px; /* Film reel size */
+        /* Icons Sizes (Varied for randomness) */
+        80px 80px,   /* Popcorn 1 */
+        100px 100px, /* Reel 1 */
+        70px 70px,   /* Popcorn 2 */
+        120px 120px, /* Strip */
+        50px 50px,   /* Reel 2 (Small) */
+        
+        /* Corner Sizes (Do not change) */
+        51% 51%, 51% 51%, 51% 51%, 51% 51%;
         
     background-position: 
-        top left, top right, bottom left, bottom right, /* Corner positions */
-        0 0, /* Popcorn offset */
-        40px 40px; /* Film reel offset (staggered) */
+        /* Random Scatter Positions (X  Y) */
+        10% 20%,   /* Popcorn 1 */
+        90% 45%,   /* Reel 1 */
+        70% 85%,   /* Popcorn 2 */
+        15% 90%,   /* Strip */
+        50% 10%,   /* Reel 2 */
+
+        /* Corner Positions */
+        top left, top right, bottom left, bottom right;
         
     background-repeat: 
-        no-repeat, no-repeat, no-repeat, no-repeat, /* Corners don't repeat */
-        repeat, repeat; /* Patterns repeat */
+        no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, /* Icons don't repeat */
+        no-repeat, no-repeat, no-repeat, no-repeat; /* Corners don't repeat */
 
     /* Remove standard border */
     border: none;
