@@ -4,42 +4,76 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Target, TrendingUp, Award, Users, Briefcase, Zap, ShoppingCart, Gavel, Flame, HelpCircle, Film } from "lucide-react";
 import WaveformBackground from "@/components/WaveformBackground";
 import { Button } from "@/components/ui/button";
-
 const BedrockPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const features = [
-    { icon: <Gavel className="w-5 h-5" />, title: "The Auction", desc: "13 Teams. Limited Restaurants. Bid high or go home hungry." },
-    { icon: <Zap className="w-5 h-5" />, title: "Market Chaos", desc: "Sell food, execute tasks, and dominate the C'Not economy." },
-    { icon: <Award className="w-5 h-5" />, title: "The Stakes", desc: "₹50,000+ prize pool for the masters of market disruption." }
-  ];
-
-  const stripboardItems = [
-    { scene: "01", title: "ANC_TAKEOVER", label: "Restaurant_View" },
-    { scene: "02", title: "AUCTION_PIT", label: "Market_Open" },
-    { scene: "03", title: "LTC_SQUAD", label: "Team_Deployment" },
-    { scene: "04", title: "NIGHT_SHIFT", label: "Operational_Chaos" },
-    { scene: "05", title: "REDI_OPS", label: "Supply_Chain" },
-    { scene: "06", title: "FINAL_TALLY", label: "Profit_Declaration" },
-  ];
-
-  const faqs = [
-    { q: "Who can enter Bedrock?", a: "Wings, groups of friends, clubs, departments—anything goes. If you can build a team, you can build a business." },
-    { q: "How many teams are selected?", a: "Only 13 elite teams will make it through the initial screening to reach the Auction Pit." },
-    { q: "What is the primary objective?", a: "To 'buy' a C'not restaurant via auction and generate the highest net profit over the event duration." },
-    { q: "Do we need prior business experience?", a: "No. You just need the grit to sell, the strategy to outbid, and the energy to outlast the competition." },
-    { q: "How does the auction work?", a: "Teams use a virtual budget to bid for physical restaurant slots in C'not. Strategy is key to getting a high-traffic spot." }
-  ];
-
-  return (
-    <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden film-grain font-mono">
+  const features = [{
+    icon: <Gavel className="w-5 h-5" />,
+    title: "The Auction",
+    desc: "13 Teams. Limited Restaurants. Bid high or go home hungry."
+  }, {
+    icon: <Zap className="w-5 h-5" />,
+    title: "Market Chaos",
+    desc: "Sell food, execute tasks, and dominate the C'Not economy."
+  }, {
+    icon: <Award className="w-5 h-5" />,
+    title: "The Stakes",
+    desc: "₹50,000+ prize pool for the masters of market disruption."
+  }];
+  const stripboardItems = [{
+    scene: "01",
+    title: "ANC_TAKEOVER",
+    label: "Restaurant_View"
+  }, {
+    scene: "02",
+    title: "AUCTION_PIT",
+    label: "Market_Open"
+  }, {
+    scene: "03",
+    title: "LTC_SQUAD",
+    label: "Team_Deployment"
+  }, {
+    scene: "04",
+    title: "NIGHT_SHIFT",
+    label: "Operational_Chaos"
+  }, {
+    scene: "05",
+    title: "REDI_OPS",
+    label: "Supply_Chain"
+  }, {
+    scene: "06",
+    title: "FINAL_TALLY",
+    label: "Profit_Declaration"
+  }];
+  const faqs = [{
+    q: "Who can enter Bedrock?",
+    a: "Wings, groups of friends, clubs, departments—anything goes. If you can build a team, you can build a business."
+  }, {
+    q: "How many teams are selected?",
+    a: "Only 13 elite teams will make it through the initial screening to reach the Auction Pit."
+  }, {
+    q: "What is the primary objective?",
+    a: "To 'buy' a C'not restaurant via auction and generate the highest net profit over the event duration."
+  }, {
+    q: "Do we need prior business experience?",
+    a: "No. You just need the grit to sell, the strategy to outbid, and the energy to outlast the competition."
+  }, {
+    q: "How does the auction work?",
+    a: "Teams use a virtual budget to bid for physical restaurant slots in C'not. Strategy is key to getting a high-traffic spot."
+  }];
+  return <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden film-grain font-mono">
       <WaveformBackground />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 pb-40">
         
         {/* Navigation */}
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
+        <motion.div initial={{
+        opacity: 0,
+        y: -20
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} className="mb-12">
           <Link to="/" className="inline-flex items-center gap-2 text-primary hover:gap-4 transition-all duration-300 text-sm uppercase tracking-widest">
             <ArrowLeft className="w-4 h-4" /> Exit_Theatre
           </Link>
@@ -47,7 +81,13 @@ const BedrockPage = () => {
 
         {/* Hero Section */}
         <div className="grid lg:grid-cols-2 gap-16 items-start mb-24">
-          <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }}>
+          <motion.div initial={{
+          opacity: 0,
+          x: -50
+        }} animate={{
+          opacity: 1,
+          x: 0
+        }}>
             <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 border border-primary/30 bg-primary/5 text-primary text-xs tracking-widest uppercase">
               <Target className="w-4 h-4" /> Market_Volatility: HIGH
             </div>
@@ -66,7 +106,7 @@ const BedrockPage = () => {
               </div>
               <div className="border border-primary/20 p-4 bg-secondary/10">
                 <TrendingUp className="w-5 h-5 text-primary mx-auto mb-2" />
-                <span className="text-2xl font-bold block text-foreground tracking-tighter">5 Days</span>
+                <span className="text-2xl font-bold block text-foreground tracking-tighter">1 Day</span>
                 <span className="text-[10px] text-muted-foreground uppercase tracking-widest">Selling_Ops</span>
               </div>
               <div className="border border-primary/20 p-4 bg-primary/10">
@@ -97,19 +137,19 @@ const BedrockPage = () => {
 
         {/* Mechanics Grid */}
         <div className="grid md:grid-cols-3 gap-8 mb-32">
-          {features.map((f, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="p-8 border border-primary/20 bg-secondary/5 group hover:border-primary/50 transition-all"
-            >
+          {features.map((f, i) => <motion.div key={i} initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          delay: i * 0.1
+        }} className="p-8 border border-primary/20 bg-secondary/5 group hover:border-primary/50 transition-all">
               <div className="text-primary mb-4">{f.icon}</div>
               <h4 className="text-lg font-bold uppercase mb-2 tracking-tighter">{f.title}</h4>
               <p className="text-sm text-muted-foreground font-sans leading-relaxed">{f.desc}</p>
-            </motion.div>
-          ))}
+            </motion.div>)}
         </div>
 
         {/* FAQ Section */}
@@ -118,21 +158,20 @@ const BedrockPage = () => {
             <HelpCircle className="w-6 h-6" /> // MARKET_INTEL_FAQ
           </h2>
           <div className="grid md:grid-cols-2 gap-10">
-            {faqs.map((faq, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                className="border-l border-primary/30 pl-6 group"
-              >
+            {faqs.map((faq, i) => <motion.div key={i} initial={{
+            opacity: 0,
+            x: -20
+          }} whileInView={{
+            opacity: 1,
+            x: 0
+          }} className="border-l border-primary/30 pl-6 group">
                 <h4 className="text-primary text-sm font-bold uppercase mb-3 tracking-widest group-hover:text-foreground transition-colors">
                   {faq.q}
                 </h4>
                 <p className="text-muted-foreground text-sm font-sans leading-relaxed">
                   {faq.a}
                 </p>
-              </motion.div>
-            ))}
+              </motion.div>)}
           </div>
         </div>
 
@@ -146,11 +185,7 @@ const BedrockPage = () => {
           </div>
           
           <div className="flex overflow-x-auto gap-1 px-6 pb-8 no-scrollbar scroll-smooth snap-x snap-mandatory border-t border-b border-primary/10 bg-secondary/5 py-12">
-            {stripboardItems.map((item, i) => (
-              <div 
-                key={i}
-                className="flex-none w-[300px] md:w-[400px] snap-center group cursor-pointer"
-              >
+            {stripboardItems.map((item, i) => <div key={i} className="flex-none w-[300px] md:w-[400px] snap-center group cursor-pointer">
                 <div className="relative aspect-[16/9] border border-primary/20 bg-black overflow-hidden mb-4">
                   <div className="absolute top-2 left-2 text-[10px] text-primary/40 font-mono tracking-widest">SCENE {item.scene}</div>
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -174,14 +209,11 @@ const BedrockPage = () => {
                       VIEW_RECAP &gt;&gt;
                    </span>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default BedrockPage;
