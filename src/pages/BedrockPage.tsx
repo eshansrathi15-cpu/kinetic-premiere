@@ -48,12 +48,12 @@ const BedrockPage = () => {
 
   const features = [{
     icon: <Gavel className="w-5 h-5" />,
-    title: "The Auction",
-    desc: "13 Teams. Limited Restaurants. Bid high or go home hungry."
+    title: "Timeline",
+    desc: "Find how Bedrock fits into E-Week."
   }, {
     icon: <Zap className="w-5 h-5" />,
-    title: "Market Chaos",
-    desc: "Sell food, execute tasks, and dominate the C'Not economy."
+    title: "Rulebook",
+    desc: "Plus FAQs."
   }, {
     icon: <Award className="w-5 h-5" />,
     title: "The Stakes",
