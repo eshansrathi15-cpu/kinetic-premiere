@@ -1,13 +1,51 @@
-import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Target, TrendingUp, Award, Users, Briefcase, Zap, ShoppingCart, Gavel, Flame, HelpCircle, Film } from "lucide-react";
+import { ArrowLeft, Target, TrendingUp, Award, Users, Briefcase, Zap, ShoppingCart, Gavel, Flame, HelpCircle, Film, X } from "lucide-react";
 import WaveformBackground from "@/components/WaveformBackground";
 import { Button } from "@/components/ui/button";
+
 const BedrockPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const [showModal, setShowModal] = useState(false);
+  const [teamName, setTeamName] = useState("");
+  const [captainName, setCaptainName] = useState("");
+  const [captainId, setCaptainId] = useState("");
+  const [captainPhone, setCaptainPhone] = useState("");
+  const [numMembers, setNumMembers] = useState("");
+  const [teamMembers, setTeamMembers] = useState([]);
+
+  const handleNumMembersChange = (e) => {
+    const num = parseInt(e.target.value) || 0;
+    setNumMembers(e.target.value);
+    
+    // Create array for additional team members (excluding captain)
+    const additionalMembers = num > 1 ? num - 1 : 0;
+    setTeamMembers(Array(additionalMembers).fill(null).map(() => ({ name: "", id: "" })));
+  };
+
+  const handleMemberChange = (index, field, value) => {
+    const updated = [...teamMembers];
+    updated[index] = { ...updated[index], [field]: value };
+    setTeamMembers(updated);
+  };
+
+  const handleSubmit = () => {
+    // Handle form submission here
+    console.log({
+      teamName,
+      captain: { name: captainName, id: captainId, phone: captainPhone },
+      numMembers,
+      teamMembers
+    });
+    // Close modal and reset form
+    setShowModal(false);
+    // Reset form fields if needed
+  };
+
   const features = [{
     icon: <Gavel className="w-5 h-5" />,
     title: "The Auction",
@@ -21,6 +59,7 @@ const BedrockPage = () => {
     title: "The Stakes",
     desc: "₹20,000+ prize pool."
   }];
+
   const stripboardItems = [{
     scene: "01",
     title: "C'NOT_TAKEOVER",
@@ -46,6 +85,7 @@ const BedrockPage = () => {
     title: "FINAL_TALLY",
     label: "Profit_Declaration"
   }];
+
   return <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden film-grain font-mono">
       <WaveformBackground />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 pb-40">
@@ -112,7 +152,9 @@ const BedrockPage = () => {
               <p className="text-muted-foreground">{">"} SYSTEM: New problem statement uploaded for Day 2</p>
               <p className="text-yellow-400">{">"} WARNING: High traffic detected at ANC Circle</p>
               <p className="text-primary animate-pulse">{">"} WAITING FOR NEXT BID...</p>
-              <Button className="w-full bg-primary text-black font-bold uppercase py-6 mt-6 tracking-widest hover:bg-primary/80 transition-all">
+              <Button 
+                onClick={() => setShowModal(true)}
+                className="w-full bg-primary text-black font-bold uppercase py-6 mt-6 tracking-widest hover:bg-primary/80 transition-all">
                 Team Questionnaire
               </Button>
             </div>
@@ -210,6 +252,165 @@ const BedrockPage = () => {
         </div>
 
       </div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            onClick={() => setShowModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-background border-2 border-primary/30 p-8 film-grain"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setShowModal(false)}
+                className="absolute top-4 right-4 text-primary hover:text-foreground transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              {/* Modal Header */}
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold uppercase tracking-tighter text-primary mb-2">
+                  TEAM_REGISTRATION
+                </h2>
+                <p className="text-xs text-muted-foreground uppercase tracking-widest">
+                  SECURE_FORM_v2.1 // BROWNIE POINTS FOR COOLEST NAMES!
+                </p>
+              </div>
+
+              {/* Form */}
+              <div className="space-y-6">
+                {/* Team Name */}
+                <div>
+                  <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">
+                    1. Team Name
+                  </label>
+                  <input
+                    type="text"
+                    value={teamName}
+                    onChange={(e) => setTeamName(e.target.value)}
+                    className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
+                    placeholder="Enter team name..."
+                  />
+                </div>
+
+                {/* Captain Info */}
+                <div className="border-l-2 border-primary/30 pl-6 space-y-4">
+                  <p className="text-xs text-primary uppercase tracking-widest font-bold">CAPTAIN DETAILS</p>
+                  
+                  <div>
+                    <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
+                      2. Captain - Name
+                    </label>
+                    <input
+                      type="text"
+                      value={captainName}
+                      onChange={(e) => setCaptainName(e.target.value)}
+                      className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
+                      placeholder="Enter captain name..."
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
+                      3. Captain - BITS ID
+                    </label>
+                    <input
+                      type="text"
+                      value={captainId}
+                      onChange={(e) => setCaptainId(e.target.value)}
+                      className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
+                      placeholder="Enter BITS ID..."
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
+                      4. Captain - Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      value={captainPhone}
+                      onChange={(e) => setCaptainPhone(e.target.value)}
+                      className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
+                      placeholder="Enter phone number..."
+                    />
+                  </div>
+                </div>
+
+                {/* Number of Team Members */}
+                <div>
+                  <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">
+                    5. Number of Team Members (Including Captain)
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    value={numMembers}
+                    onChange={handleNumMembersChange}
+                    className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
+                    placeholder="Enter number..."
+                  />
+                </div>
+
+                {/* Dynamic Team Members */}
+                {teamMembers.map((member, index) => (
+                  <div key={index} className="border-l-2 border-primary/30 pl-6 space-y-4">
+                    <p className="text-xs text-primary uppercase tracking-widest font-bold">
+                      MEMBER {index + 2} DETAILS
+                    </p>
+                    
+                    <div>
+                      <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
+                        {6 + index * 2}. Team Member {index + 2} - Name
+                      </label>
+                      <input
+                        type="text"
+                        value={member.name}
+                        onChange={(e) => handleMemberChange(index, 'name', e.target.value)}
+                        className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
+                        placeholder="Enter name..."
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
+                        {7 + index * 2}. Team Member {index + 2} - BITS ID
+                      </label>
+                      <input
+                        type="text"
+                        value={member.id}
+                        onChange={(e) => handleMemberChange(index, 'id', e.target.value)}
+                        className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
+                        placeholder="Enter BITS ID..."
+                      />
+                    </div>
+                  </div>
+                ))}
+
+                {/* Submit Button */}
+                <Button
+                  onClick={handleSubmit}
+                  className="w-full bg-primary text-black font-bold uppercase py-6 mt-8 tracking-widest hover:bg-primary/80 transition-all"
+                >
+                  SUBMIT_REGISTRATION
+                </Button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>;
 };
+
 export default BedrockPage;
