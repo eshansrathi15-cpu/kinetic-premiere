@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Target, TrendingUp, Award, Users, Briefcase, Zap, ShoppingCart, Gavel, Flame, HelpCircle, Film, X, Clock } from "lucide-react";
+import { ArrowLeft, Target, TrendingUp, Award, Users, Briefcase, Zap, ShoppingCart, Gavel, Flame, HelpCircle, Film, X, Clock, Brain, Crown } from "lucide-react";
 import WaveformBackground from "@/components/WaveformBackground";
 import { Button } from "@/components/ui/button";
 
@@ -44,12 +44,12 @@ const BedrockPage = () => {
     setShowModal(false);
   };
 
-  // Timeline Data - UPDATED WITH NEW SCHEDULE
+  // Timeline Data - UPDATED WITH SPECIFIC ICONS
   const bedrockTimeline = [
-    { time: "19th Jan", event: "Team Qualifiers: A 30-minute fun activity to test your team’s creativity. Think of it more like a fun brainstorming session.", status: "LIVE" },
-    { time: "20th Jan", event: "Online Interactions: Tell us more about your ideas, skills and team members. It’s the final step before reaching your restaurant at C’not.", status: "UPCOMING" },
-    { time: "22nd Jan", event: "The Auction: Get ready with your bids and negotiating skills to get your team the best restaurant, increasing your chances of winning.", status: "UPCOMING" },
-    { time: "25th Jan", event: "BEDROCK: Take over C’not with your team to compete against all restaurants to clock the maximum revenue.", status: "FINALE" }
+    { time: "19th Jan", event: "Team Qualifiers: Test your team’s creativity. 30 mins of brainstorming!", status: "LIVE", icon: <Brain className="w-5 h-5 text-primary" /> },
+    { time: "20th Jan", event: "Online Interactions: Tell us more about your ideas, skills and team.", status: "UPCOMING", icon: <Users className="w-5 h-5 text-primary" /> },
+    { time: "22nd Jan", event: "The Auction: Get ready with your bids and negotiating skills to nab your team the best restaurant!", status: "UPCOMING", icon: <Gavel className="w-5 h-5 text-primary" /> },
+    { time: "25th Jan", event: "BEDROCK: C’not is yours for the taking!", status: "FINALE", icon: <Crown className="w-5 h-5 text-primary" /> }
   ];
 
   const features = [{
@@ -266,7 +266,7 @@ const BedrockPage = () => {
 
       </div>
 
-      {/* TIMELINE POP-UP WITH NEW CONTENT */}
+      {/* TIMELINE POP-UP - AESTHETIC UPGRADE */}
       <AnimatePresence>
         {showTimeline && (
           <motion.div
@@ -303,16 +303,21 @@ const BedrockPage = () => {
                 </p>
               </div>
 
-              <div className="space-y-8">
+              <div className="space-y-12">
                 {bedrockTimeline.map((item, idx) => (
                   <div key={idx} className="flex gap-6 border-l border-primary/30 pl-6 relative">
-                    <div className="absolute -left-[5px] top-1 w-2 h-2 bg-primary shadow-[0_0_8px_rgba(var(--primary),1)] rounded-full" />
-                    <div>
-                      <div className="flex items-center gap-3 mb-1">
-                        <span className="text-primary font-bold text-sm tracking-widest">{item.time}</span>
-                        <span className="text-[8px] border border-primary/20 px-1 text-muted-foreground">{item.status}</span>
+                    {/* The Visual Hub */}
+                    <div className="absolute -left-[16px] top-0 w-8 h-8 bg-background border border-primary/50 flex items-center justify-center shadow-[0_0_10px_rgba(var(--primary),0.3)]">
+                        {item.icon}
+                    </div>
+                    
+                    <div className="flex flex-col">
+                      <div className="flex items-baseline gap-3 mb-2">
+                        {/* BIGGER DATES AS REQUESTED */}
+                        <span className="text-primary font-bold text-2xl tracking-tighter uppercase">{item.time}</span>
+                        <span className="text-[8px] border border-primary/20 px-2 py-0.5 text-muted-foreground uppercase tracking-widest">{item.status}</span>
                       </div>
-                      <p className="text-muted-foreground text-sm font-sans leading-tight">{item.event}</p>
+                      <p className="text-muted-foreground text-sm font-sans leading-relaxed">{item.event}</p>
                     </div>
                   </div>
                 ))}
