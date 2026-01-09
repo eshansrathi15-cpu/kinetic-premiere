@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Target, TrendingUp, Award, Users, Briefcase, Zap, ShoppingCart, Gavel, Flame, HelpCircle, Film, X } from "lucide-react";
+import { ArrowLeft, Target, TrendingUp, Award, Users, Briefcase, Zap, ShoppingCart, Gavel, Flame, HelpCircle, Film, X, Clock } from "lucide-react";
 import WaveformBackground from "@/components/WaveformBackground";
 import { Button } from "@/components/ui/button";
 
@@ -11,6 +11,7 @@ const BedrockPage = () => {
   }, []);
 
   const [showModal, setShowModal] = useState(false);
+  const [showTimeline, setShowTimeline] = useState(false); // State for Timeline
   const [teamName, setTeamName] = useState("");
   const [captainName, setCaptainName] = useState("");
   const [captainId, setCaptainId] = useState("");
@@ -34,22 +35,28 @@ const BedrockPage = () => {
   };
 
   const handleSubmit = () => {
-    // Handle form submission here
     console.log({
       teamName,
       captain: { name: captainName, id: captainId, phone: captainPhone },
       numMembers,
       teamMembers
     });
-    // Close modal and reset form
     setShowModal(false);
-    // Reset form fields if needed
   };
+
+  // Timeline Data
+  const bedrockTimeline = [
+    { time: "Day 0", event: "The Auction Pit: Bidding for your Restaurant.", status: "COMPLETED" },
+    { time: "Day 1 (08:00)", event: "Supply Chain Procurement: Sourcing raw materials.", status: "UPCOMING" },
+    { time: "Day 1 (12:00)", event: "Market Open: Operations and Marketing blitz.", status: "UPCOMING" },
+    { time: "Day 1 (22:00)", event: "The Final Tally: Profit declaration and auditing.", status: "UPCOMING" }
+  ];
 
   const features = [{
     icon: <Gavel className="w-5 h-5" />,
     title: "Timeline",
-    desc: "Find how Bedrock fits into E-Week."
+    desc: "Find how Bedrock fits into E-Week.",
+    onClick: () => setShowTimeline(true) // Trigger
   }, {
     icon: <Zap className="w-5 h-5" />,
     title: "Rulebook",
@@ -163,15 +170,21 @@ const BedrockPage = () => {
 
         {/* Mechanics Grid */}
         <div className="grid md:grid-cols-3 gap-8 mb-32">
-          {features.map((f, i) => <motion.div key={i} initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          delay: i * 0.1
-        }} className="p-8 border border-primary/20 bg-secondary/5 group hover:border-primary/50 transition-all">
+          {features.map((f, i) => <motion.div 
+            key={i} 
+            onClick={f.onClick} // Trigger Timeline
+            initial={{
+              opacity: 0,
+              y: 20
+            }} 
+            whileInView={{
+              opacity: 1,
+              y: 0
+            }} 
+            transition={{
+              delay: i * 0.1
+            }} 
+            className={`p-8 border border-primary/20 bg-secondary/5 group hover:border-primary/50 transition-all ${f.onClick ? "cursor-pointer" : ""}`}>
               <div className="text-primary mb-4">{f.icon}</div>
               <h4 className="text-lg font-bold uppercase mb-2 tracking-tighter">{f.title}</h4>
               <p className="text-sm text-muted-foreground font-sans leading-relaxed">{f.desc}</p>
@@ -253,7 +266,63 @@ const BedrockPage = () => {
 
       </div>
 
-      {/* Modal */}
+      {/* MODIFIED TIMELINE POP-UP */}
+      <AnimatePresence>
+        {showTimeline && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xl"
+            onClick={() => setShowTimeline(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ 
+                scale: 1, 
+                opacity: 1,
+                transition: { type: "spring", damping: 20, stiffness: 300 }
+              }}
+              exit={{ scale: 0.5, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-lg bg-background border-2 border-primary/50 p-10 film-grain shadow-2xl"
+            >
+              <button
+                onClick={() => setShowTimeline(false)}
+                className="absolute top-6 right-6 text-primary hover:rotate-90 transition-transform duration-200"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              <div className="mb-10 text-center">
+                <h2 className="text-4xl font-bold uppercase tracking-tighter text-primary mb-2 flex items-center justify-center gap-3">
+                  <Clock className="w-8 h-8" /> TIMELINE
+                </h2>
+                <p className="text-[10px] text-muted-foreground uppercase tracking-[0.4em]">
+                  MISSION_OPERATIONS_HUB
+                </p>
+              </div>
+
+              <div className="space-y-8">
+                {bedrockTimeline.map((item, idx) => (
+                  <div key={idx} className="flex gap-6 border-l border-primary/30 pl-6 relative">
+                    <div className="absolute -left-[5px] top-1 w-2 h-2 bg-primary shadow-[0_0_8px_rgba(var(--primary),1)] rounded-full" />
+                    <div>
+                      <div className="flex items-center gap-3 mb-1">
+                        <span className="text-primary font-bold text-sm tracking-widest">{item.time}</span>
+                        <span className="text-[8px] border border-primary/20 px-1 text-muted-foreground">{item.status}</span>
+                      </div>
+                      <p className="text-muted-foreground text-sm font-sans">{item.event}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Registration Modal (Original) */}
       <AnimatePresence>
         {showModal && (
           <motion.div
@@ -270,7 +339,6 @@ const BedrockPage = () => {
               onClick={(e) => e.stopPropagation()}
               className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-background border-2 border-primary/30 p-8 film-grain"
             >
-              {/* Close Button */}
               <button
                 onClick={() => setShowModal(false)}
                 className="absolute top-4 right-4 text-primary hover:text-foreground transition-colors"
@@ -278,7 +346,6 @@ const BedrockPage = () => {
                 <X className="w-6 h-6" />
               </button>
 
-              {/* Modal Header */}
               <div className="mb-8">
                 <h2 className="text-3xl font-bold uppercase tracking-tighter text-primary mb-2">
                   TEAM_REGISTRATION
@@ -288,9 +355,8 @@ const BedrockPage = () => {
                 </p>
               </div>
 
-              {/* Form */}
+              {/* Form remains exactly as provided */}
               <div className="space-y-6">
-                {/* Team Name */}
                 <div>
                   <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">
                     1. Team Name
@@ -304,10 +370,8 @@ const BedrockPage = () => {
                   />
                 </div>
 
-                {/* Captain Info */}
                 <div className="border-l-2 border-primary/30 pl-6 space-y-4">
                   <p className="text-xs text-primary uppercase tracking-widest font-bold">CAPTAIN DETAILS</p>
-                  
                   <div>
                     <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
                       2. Captain - Name
@@ -320,7 +384,6 @@ const BedrockPage = () => {
                       placeholder="Enter captain name..."
                     />
                   </div>
-
                   <div>
                     <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
                       3. Captain - BITS ID
@@ -333,7 +396,6 @@ const BedrockPage = () => {
                       placeholder="Enter BITS ID..."
                     />
                   </div>
-
                   <div>
                     <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
                       4. Captain - Phone Number
@@ -348,7 +410,6 @@ const BedrockPage = () => {
                   </div>
                 </div>
 
-                {/* Number of Team Members */}
                 <div>
                   <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">
                     5. Number of Team Members (Including Captain)
@@ -363,13 +424,11 @@ const BedrockPage = () => {
                   />
                 </div>
 
-                {/* Dynamic Team Members */}
                 {teamMembers.map((member, index) => (
                   <div key={index} className="border-l-2 border-primary/30 pl-6 space-y-4">
                     <p className="text-xs text-primary uppercase tracking-widest font-bold">
                       MEMBER {index + 2} DETAILS
                     </p>
-                    
                     <div>
                       <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
                         {6 + index * 2}. Team Member {index + 2} - Name
@@ -382,7 +441,6 @@ const BedrockPage = () => {
                         placeholder="Enter name..."
                       />
                     </div>
-
                     <div>
                       <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
                         {7 + index * 2}. Team Member {index + 2} - BITS ID
@@ -398,7 +456,6 @@ const BedrockPage = () => {
                   </div>
                 ))}
 
-                {/* Submit Button */}
                 <Button
                   onClick={handleSubmit}
                   className="w-full bg-primary text-black font-bold uppercase py-6 mt-8 tracking-widest hover:bg-primary/80 transition-all"
