@@ -342,7 +342,7 @@ transition: { type: "spring", damping: 20, stiffness: 300 }
 }} 
 exit={{ scale: 0.5, opacity: 0 }} 
 onClick={(e) => e.stopPropagation()} 
-className="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto bg-background border-2 border-primary/50 p-10 film-grain shadow-2xl" 
+className="relative w-full max-w-4xl max-h-[85vh] overflow-y-auto bg-background border-2 border-primary/50 p-12 film-grain shadow-2xl custom-scrollbar" 
 > 
 <button 
 onClick={() => setShowRulebook(false)} 
@@ -351,47 +351,85 @@ className="absolute top-6 right-6 text-primary hover:rotate-90 transition-transf
 <X className="w-6 h-6" /> 
 </button> 
 
-<div className="mb-10 text-center"> 
-<h2 className="text-4xl font-bold uppercase tracking-tighter text-primary mb-2 flex items-center justify-center gap-3"> 
-<BookOpen className="w-8 h-8" /> RULEBOOK 
+<div className="mb-12 text-center"> 
+<h2 className="text-5xl font-bold uppercase tracking-tighter text-primary mb-4 flex items-center justify-center gap-4"> 
+<BookOpen className="w-10 h-10" /> OFFICIAL RULEBOOK 
 </h2> 
-<p className="text-[10px] text-muted-foreground uppercase tracking-[0.4em]"> 
-OFFICIAL_OPERATING_PROTOCOLS 
+<p className="text-[12px] text-muted-foreground uppercase tracking-[0.6em] border-y border-primary/20 py-2 inline-block"> 
+PROTOCOL_DOCKET_v.2025 
 </p> 
 </div> 
 
-<div className="space-y-8 font-sans"> 
-<div className="border-l-2 border-primary/30 pl-4">
-<h4 className="text-primary font-bold uppercase text-sm mb-2 tracking-widest flex items-center gap-2">
-<ScrollText className="w-4 h-4" /> 1. Operational Command
-</h4>
-<p className="text-muted-foreground text-sm leading-relaxed">
-Teams have absolute autonomy over restaurant marketing and menu pricing, provided all BITS-specific health and safety regulations are met.
-</p>
+<div className="space-y-10 font-sans text-lg text-muted-foreground leading-relaxed"> 
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">01. GENERAL CONDUCT</span>
+<p>The rules mentioned in this rulebook apply to all teams without exception. Violating any of these rules or any other misconduct going against the event's spirit may result in penalties, including (but not limited to) point deductions, temporary freeze on sales, and disqualification. The final decision-making power in case of any contentions will be in the hands of the Bedrock Organizing Team.</p>
 </div>
 
-<div className="border-l-2 border-primary/30 pl-4">
-<h4 className="text-primary font-bold uppercase text-sm mb-2 tracking-widest flex items-center gap-2">
-<ScrollText className="w-4 h-4" /> 2. The Auction Pit
-</h4>
-<p className="text-muted-foreground text-sm leading-relaxed">
-Restaurant allocation is determined solely by the auction. Bidding uses virtual credits; collusion with other teams to suppress prices results in immediate blacklisting.
-</p>
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">02. PRODUCTION PROTOCOL</span>
+<p>No readymade items can be procured from (and no partnerships can be made with) other restaurants or vendors/services. All the items sold at bedrock must be produced in-house on the day. This rule will apply without exceptions, and anyone violating this rule will face strict penalties, including disqualification.</p>
 </div>
 
-<div className="border-l-2 border-primary/30 pl-4">
-<h4 className="text-primary font-bold uppercase text-sm mb-2 tracking-widest flex items-center gap-2">
-<ScrollText className="w-4 h-4" /> 3. Revenue Declaration
-</h4>
-<p className="text-muted-foreground text-sm leading-relaxed">
-Final tallying is audited by the CEL Venture Fund team. Any discrepancies in revenue logging will lead to an automatic 50% profit penalty.
-</p>
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">03. REVENUE & VERIFICATION</span>
+<p>All and any bills for any item sold must be verified by the CEL team member allotted to your restaurant to be considered sales on BedRock Day. The revenue generated through all sales of food, packaged products, and other items shall go directly to the restaurant's owner on his UPI ID scanners or through cash without any intermediary involvement. The team shall take no share of the revenue. Any team found violating this will be disqualified from BedRock immediately.</p>
 </div>
 
-<div className="mt-8 p-4 bg-primary/5 border border-primary/20 text-xs text-primary italic uppercase tracking-wider text-center">
-"Fortune favors the bold, but the market only rewards the smart."
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">04. SUBSTANCE POLICY</span>
+<p>The use and abuse of alcohol, narcotics, and other illegal substances is strictly prohibited. Any team found using, providing, or in possession of substances will be disqualified from Bedrock immediately and is liable to face institute action.</p>
+</div>
+
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">06. LOGISTICS</span>
+<p>All sales must be made, paid, and completed at C’Not. Home deliveries are strictly prohibited and will not be considered sales for Bedrock unless done through the facilitation of a PowerUp.</p>
+</div>
+
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">07. INCENTIVES</span>
+<p>Any additional goodies or freebies to be given out by a team as rewards must come directly from the team. Teams and restaurant owners are prohibited from using restaurant budgets to procure these items.</p>
+</div>
+
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">08. SPATIAL LIMITS</span>
+<p>Teams will only be allowed to use the space generally allocated to their restaurants unless otherwise discussed and approved by the Bedrock Organizing Team. The approvals will be evaluated case by case, and the organising team reserves the right to deny any request for extra space. Teams are free to use the space outside the walls within the boundaries of their restaurants for marketing purposes, but this space strictly cannot be used for extra seating.</p>
+</div>
+
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">09. PERSONNEL CHANGES</span>
+<p>Any replacements in team members will be evaluated on a case-by-case basis and must be conveyed to and approved by the Bedrock Organizing Team by 14th February 2025 at 10 PM. The Bedrock Team reserves the right to deny any team changes.</p>
+</div>
+
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">10. DYNAMIC REPLACEMENT</span>
+<p>Team members cannot be replaced dynamically during the event. Any shortfall in team members during the day will not be compensated, and teams will have to work with the remaining members.</p>
+</div>
+
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">11. RETAIL RESTRICTIONS</span>
+<p>If your restaurant sells retail items (Bottled Beverages and Food items) on a normal day, those retail items will be allowed and considered in your sales at Bedrock. No new types of retail items can be purchased specifically for Bedrock. Furthermore, restaurants that generally do not sell retail items will not be allowed to sell retail items at Bedrock.</p>
+</div>
+
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">12. PRICING & QUANTITY</span>
+<p>Any change in prices and quantity of items listed on the restaurant's menu must be with the consent of the restaurant owner and informed to the POR of your team and restaurant.</p>
+</div>
+
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">13. MENU ADDITIONS</span>
+<p>Any menu items that need to be added have to be added with the consent of the restaurant owner and the prior approval of the Bedrock Organizing Team. The organising team reserves the right to veto any new menu item planned without exception.</p>
+</div>
+
+<div className="border-l-4 border-primary/40 pl-6 py-2">
+<span className="text-primary font-bold text-2xl mb-2 block">14. BEVERAGE COMPLIANCE</span>
+<p>Milkshakes and all other beverages (except bottled ones) must be made in-house to be sold. Prices of all such items introduced outside of regular menus of the restaurants must be priorly approved by the owner and informed to the BedRock Team. The organising team reserves the right to veto any planned price and its changes without exception.</p>
 </div>
 </div> 
+
+<div className="mt-16 p-6 bg-primary/10 border-2 border-primary/30 text-lg text-primary font-bold uppercase tracking-widest text-center">
+"Fortune favors the bold."
+</div>
 </motion.div> 
 </motion.div> 
 )} 
