@@ -82,9 +82,9 @@ const SponsorsSection = () => {
       }} viewport={{
         once: true
       }} className="text-center mt-12 text-muted-foreground font-mono text-sm">
-          Interested in co-producing?{' '}
+          Presented by{' '}
           <a href="#" className="text-primary hover:underline">
-            Contact us →
+            CEL TEAM
           </a>
         </motion.p>
       </div>
