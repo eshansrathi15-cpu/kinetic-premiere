@@ -25,6 +25,8 @@ const GoogleLoginBtn = () => {
         if (storedUser) {
             setUser(JSON.parse(storedUser));
         }
+        console.log("Google Login Component Mounted");
+        console.log("Environment Client ID:", import.meta.env.VITE_GOOGLE_CLIENT_ID);
     }, []);
 
     const handleLogout = () => {
@@ -83,7 +85,10 @@ const GoogleLoginBtn = () => {
     }
 
     return (
-        <Button variant="default" size="sm" onClick={() => login()}>
+        <Button variant="default" size="sm" onClick={() => {
+            console.log("Register button clicked, attempting login...");
+            login();
+        }}>
             REGISTER
         </Button>
     );
