@@ -4,6 +4,18 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 
+export interface EventConfig {
+    minMembers?: number;
+    maxMembers?: number;
+    extraFields?: {
+        key: string;
+        label: string;
+        type: "text" | "tel" | "number";
+        placeholder?: string;
+        required?: boolean;
+    }[];
+}
+
 interface RegistrationModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -11,6 +23,7 @@ interface RegistrationModalProps {
     isTeamEvent?: boolean;
     title?: string;
     subtitle?: string;
+    config?: EventConfig;
 }
 
 const RegistrationModal = ({
@@ -19,16 +32,22 @@ const RegistrationModal = ({
     eventName,
     isTeamEvent = false,
     title = "EVENT REGISTRATION",
-    subtitle = "SECURE_FORM_v2.1"
+    subtitle = "SECURE_FORM_v2.1",
+    config
 }: RegistrationModalProps) => {
     const { user, login } = useAuth();
+
+    // Common State
+    const [extraData, setExtraData] = useState<Record<string, string>>({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    // Team Event State
     const [teamName, setTeamName] = useState("");
     const [captainName, setCaptainName] = useState("");
     const [captainId, setCaptainId] = useState("");
     const [captainPhone, setCaptainPhone] = useState("");
     const [numMembers, setNumMembers] = useState("");
     const [teamMembers, setTeamMembers] = useState<{ name: string, id: string }[]>([]);
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -40,10 +59,17 @@ const RegistrationModal = ({
         const val = e.target.value;
         setNumMembers(val);
         const num = parseInt(val);
+
         if (!isNaN(num) && num > 0) {
+            // Validate Max Members if config exists
+            if (config?.maxMembers && num > config.maxMembers) {
+                // Don't auto-truncate input, but we will duplicate logic below to only generate valid # of inputs?
+                // For now, let's just generate inputs and rely on browser validation or submit check.
+            }
+
             // If number of members (including captain) is X, we need X-1 extra fields
             const additionalMembers = Math.max(0, num - 1);
-            // Preserve existing data if increasing, cut off if decreasing
+
             setTeamMembers(prev => {
                 const newArr = [...prev];
                 if (additionalMembers > prev.length) {
@@ -66,21 +92,45 @@ const RegistrationModal = ({
         setTeamMembers(updated);
     };
 
+    const handleExtraFieldChange = (key: string, value: string) => {
+        setExtraData(prev => ({ ...prev, [key]: value }));
+    };
+
     const handleSubmit = async () => {
         if (!user) {
             login();
             return;
         }
+
+        // Basic Validation
+        if (isTeamEvent) {
+            if (!teamName) return alert("Team Name is required");
+            if (!captainPhone) return alert("Captain Phone is required");
+            const count = parseInt(numMembers);
+            if (config?.minMembers && count < config.minMembers) return alert(`Min team size is ${config.minMembers}`);
+            if (config?.maxMembers && count > config.maxMembers) return alert(`Max team size is ${config.maxMembers}`);
+        }
+
+        if (config?.extraFields) {
+            for (const field of config.extraFields) {
+                if (field.required && !extraData[field.key]) {
+                    return alert(`${field.label} is required`);
+                }
+            }
+        }
+
         setIsSubmitting(true);
 
         const registrationData = isTeamEvent ? {
             teamName,
-            captain: { name: captainName, id: captainId, phone: captainPhone },
+            captain: { name: captainName, id: captainId, phone: captainPhone, ...extraData }, // Spread extra data into captain/root object
             numMembers,
-            members: teamMembers
+            members: teamMembers,
+            ...extraData
         } : {
             interested: true,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            ...extraData // Include extra fields like phone, college, itemDesc
         };
 
         try {
@@ -142,6 +192,14 @@ const RegistrationModal = ({
                         </div>
 
                         <div className="space-y-6">
+                            {/* EXTRA FIELDS (Rendered at top for Individuals, mixed for teams commonly, but let's put generic extra fields first or last? 
+                                User Requirement for WOLF: Phone, College. 
+                                For Team events: usually standard fields + maybe validation.
+                                Let's render Extra Fields FIRST if it is NOT a team event, or AFTER basic details if it IS a team event?
+                                Actually, strict requirement: "Auto-populate user email/name... Include event-specific fields"
+                                Simple Approach: Render Extra Fields before the Submit button.
+                            */}
+
                             {isTeamEvent ? (
                                 <>
                                     <div>
@@ -161,103 +219,134 @@ const RegistrationModal = ({
                                         <p className="text-xs text-primary uppercase tracking-widest font-bold">CAPTAIN DETAILS</p>
                                         <div>
                                             <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
-                                                2. Captain - Name
+                                                Captain Name
                                             </label>
                                             <input
                                                 type="text"
                                                 value={captainName}
+                                                // Read-only generally if from Auth, but editable if user wants? Requirement says "Auto-populate... read-only fields"
+                                                readOnly={!!user}
                                                 onChange={(e) => setCaptainName(e.target.value)}
-                                                className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
-                                                placeholder="Enter captain name..."
+                                                className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground/50 focus:border-primary focus:outline-none transition-colors font-mono cursor-not-allowed"
                                             />
                                         </div>
                                         <div>
                                             <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
-                                                3. Captain - BITS ID
+                                                BITS ID (Optional)
                                             </label>
                                             <input
                                                 type="text"
                                                 value={captainId}
                                                 onChange={(e) => setCaptainId(e.target.value)}
                                                 className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
-                                                placeholder="Enter BITS ID..."
+                                                placeholder="Enter ID..."
                                             />
                                         </div>
                                         <div>
                                             <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
-                                                4. Captain - Phone Number
+                                                Phone Number
                                             </label>
                                             <input
                                                 type="tel"
                                                 value={captainPhone}
                                                 onChange={(e) => setCaptainPhone(e.target.value)}
                                                 className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
-                                                placeholder="Enter phone number..."
+                                                placeholder="Enter phone..."
                                             />
                                         </div>
                                     </div>
 
                                     <div>
                                         <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">
-                                            5. Number of Team Members (Including Captain)
+                                            Number of Team Members (Incl. Captain)
                                         </label>
                                         <input
                                             type="number"
-                                            min="1"
+                                            min={config?.minMembers || 1}
+                                            max={config?.maxMembers}
                                             value={numMembers}
                                             onChange={handleNumMembersChange}
                                             className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
-                                            placeholder="Enter number..."
+                                            placeholder={`Between ${config?.minMembers || 1} - ${config?.maxMembers || 'Any'}`}
                                         />
                                     </div>
 
                                     {teamMembers.map((member, index) => (
                                         <div key={index} className="border-l-2 border-primary/30 pl-6 space-y-4">
                                             <p className="text-xs text-primary uppercase tracking-widest font-bold">
-                                                MEMBER {index + 2} DETAILS
+                                                MEMBER {index + 2}
                                             </p>
-                                            <div>
-                                                <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
-                                                    {6 + index * 2}. Team Member {index + 2} - Name
-                                                </label>
+                                            <div className="grid grid-cols-2 gap-4">
                                                 <input
                                                     type="text"
                                                     value={member.name}
                                                     onChange={(e) => handleMemberChange(index, 'name', e.target.value)}
-                                                    className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
-                                                    placeholder="Enter name..."
+                                                    className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono text-sm"
+                                                    placeholder="Name"
                                                 />
-                                            </div>
-                                            <div>
-                                                <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
-                                                    {7 + index * 2}. Team Member {index + 2} - BITS ID
-                                                </label>
                                                 <input
                                                     type="text"
                                                     value={member.id}
                                                     onChange={(e) => handleMemberChange(index, 'id', e.target.value)}
-                                                    className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
-                                                    placeholder="Enter BITS ID..."
+                                                    className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono text-sm"
+                                                    placeholder="ID (Optional)"
                                                 />
                                             </div>
                                         </div>
                                     ))}
                                 </>
                             ) : (
-                                <div className="text-center py-8">
-                                    <p className="mb-4 text-xl text-foreground">Click below to confirm your registration for {eventName}.</p>
-                                    {!user && (
-                                        <p className="text-sm text-muted-foreground mb-4">You will be asked to login first.</p>
-                                    )}
+                                <div className="space-y-4">
+                                    <div className="border-l-2 border-primary/30 pl-6 space-y-4 mb-6">
+                                        <p className="text-xs text-primary uppercase tracking-widest font-bold">YOUR DETAILS</p>
+                                        <div>
+                                            <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
+                                                Name
+                                            </label>
+                                            <input
+                                                type="text"
+                                                value={user?.name || ""}
+                                                readOnly
+                                                className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground/50 font-mono cursor-not-allowed"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
+                                                Email
+                                            </label>
+                                            <input
+                                                type="text"
+                                                value={user?.email || ""}
+                                                readOnly
+                                                className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground/50 font-mono cursor-not-allowed"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                             )}
+
+                            {/* DYNAMIC EXTRA FIELDS */}
+                            {config?.extraFields?.map((field) => (
+                                <div key={field.key}>
+                                    <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">
+                                        {field.label} {field.required && '*'}
+                                    </label>
+                                    <input
+                                        type={field.type}
+                                        value={extraData[field.key] || ""}
+                                        onChange={(e) => handleExtraFieldChange(field.key, e.target.value)}
+                                        className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors font-mono"
+                                        placeholder={field.placeholder || `Enter ${field.label}...`}
+                                    />
+                                </div>
+                            ))}
 
                             <Button
                                 onClick={handleSubmit}
                                 disabled={isSubmitting}
                                 className="w-full bg-primary text-black font-bold uppercase py-6 mt-8 tracking-widest hover:bg-primary/80 transition-all disabled:opacity-50"
                             >
-                                {isSubmitting ? "PROCESSING..." : "CONFIRM_REGISTRATION"}
+                                {isSubmitting ? "PROCESSING..." : "CONFIRM REGISTRATION"}
                             </Button>
                         </div>
                     </motion.div>
