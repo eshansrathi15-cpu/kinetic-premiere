@@ -24,6 +24,7 @@ interface RegistrationModalProps {
     title?: string;
     subtitle?: string;
     config?: EventConfig;
+    disableRegistration?: boolean;
 }
 
 const RegistrationModal = ({
@@ -33,7 +34,8 @@ const RegistrationModal = ({
     isTeamEvent = false,
     title = "EVENT REGISTRATION",
     subtitle = "SECURE_FORM_v2.1",
-    config
+    config,
+    disableRegistration
 }: RegistrationModalProps) => {
     const { user, login } = useAuth();
 
@@ -224,7 +226,6 @@ const RegistrationModal = ({
                                             <input
                                                 type="text"
                                                 value={captainName}
-                                                // Read-only generally if from Auth, but editable if user wants? Requirement says "Auto-populate... read-only fields"
                                                 readOnly={!!user}
                                                 onChange={(e) => setCaptainName(e.target.value)}
                                                 className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground/50 focus:border-primary focus:outline-none transition-colors font-mono cursor-not-allowed"
@@ -297,30 +298,11 @@ const RegistrationModal = ({
                                 </>
                             ) : (
                                 <div className="space-y-4">
-                                    <div className="border-l-2 border-primary/30 pl-6 space-y-4 mb-6">
-                                        <p className="text-xs text-primary uppercase tracking-widest font-bold">YOUR DETAILS</p>
-                                        <div>
-                                            <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
-                                                Name
-                                            </label>
-                                            <input
-                                                type="text"
-                                                value={user?.name || ""}
-                                                readOnly
-                                                className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground/50 font-mono cursor-not-allowed"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-bold uppercase tracking-wider text-foreground mb-2">
-                                                Email
-                                            </label>
-                                            <input
-                                                type="text"
-                                                value={user?.email || ""}
-                                                readOnly
-                                                className="w-full bg-black/40 border border-primary/30 px-4 py-3 text-foreground/50 font-mono cursor-not-allowed"
-                                            />
-                                        </div>
+                                    {/* Simple View: Just details, no inputs */}
+                                    <div className="border border-primary/20 bg-primary/5 p-6 text-center space-y-2">
+                                        <p className="text-sm text-muted-foreground uppercase tracking-widest">REGISTERING AS</p>
+                                        <p className="text-xl font-bold font-mono text-primary">{user?.name || "GUEST"}</p>
+                                        <p className="text-xs font-mono text-muted-foreground">{user?.email}</p>
                                     </div>
                                 </div>
                             )}
@@ -343,10 +325,10 @@ const RegistrationModal = ({
 
                             <Button
                                 onClick={handleSubmit}
-                                disabled={isSubmitting}
-                                className="w-full bg-primary text-black font-bold uppercase py-6 mt-8 tracking-widest hover:bg-primary/80 transition-all disabled:opacity-50"
+                                disabled={isSubmitting || disableRegistration}
+                                className="w-full bg-primary text-black font-bold uppercase py-6 mt-8 tracking-widest hover:bg-primary/80 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                {isSubmitting ? "PROCESSING..." : "CONFIRM REGISTRATION"}
+                                {isSubmitting ? "PROCESSING..." : disableRegistration ? "DETAILS COMING SOON" : "CONFIRM REGISTRATION"}
                             </Button>
                         </div>
                     </motion.div>
