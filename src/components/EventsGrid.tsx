@@ -74,12 +74,6 @@ const EventsGrid = () => {
   const handleEventClick = async (event: EventDef) => {
     if (event.disableRegistration) return;
 
-    // Special Case: Team Events still trigger Modal
-    if (event.isTeamEvent) {
-      setSelectedEvent(event.name);
-      return;
-    }
-
     // 1-Click Registration Flow
     if (!user) {
       login();
