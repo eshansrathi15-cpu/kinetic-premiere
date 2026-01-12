@@ -5,6 +5,7 @@ import { ArrowLeft, Ticket, Star, Zap, Trophy, X, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { useRegistrationStatus } from "@/hooks/useRegistrationStatus";
 
 // Map event names to sheet tab names
 const EVENT_SHEET_MAP: Record<string, string> = {
@@ -18,9 +19,9 @@ const EVENT_SHEET_MAP: Record<string, string> = {
 
 const Tickets = () => {
   const { user, isAuthenticated } = useAuth();
+  const { registeredEvents, addRegisteredEvent, isLoading: isCheckingStatus } = useRegistrationStatus();
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [registeredEvents, setRegisteredEvents] = useState<string[]>([]);
 
   const events = [
     { id: 1, name: "DEHACK", type: "Hackathon", date: "Feb 11-16", prize: "₹1L+" },
@@ -31,6 +32,11 @@ const Tickets = () => {
     { id: 6, name: "ONE RED PAPERCLIP", type: "Logistics Challenge", date: "Feb 14", prize: "Priceless" },
   ];
 
+  const isEventRegistered = (eventName: string) => {
+    const sheetName = EVENT_SHEET_MAP[eventName];
+    return registeredEvents.includes(sheetName);
+  };
+
   const handleRegisterClick = (eventName: string) => {
     if (!isAuthenticated) {
       toast.error('Please login first', {
@@ -39,7 +45,7 @@ const Tickets = () => {
       return;
     }
 
-    if (registeredEvents.includes(eventName)) {
+    if (isEventRegistered(eventName)) {
       toast.info('Already registered', {
         description: `You have already registered for ${eventName}.`
       });
@@ -77,7 +83,7 @@ const Tickets = () => {
         toast.success('Registration successful!', {
           description: `You have been registered for ${selectedEvent}.`
         });
-        setRegisteredEvents([...registeredEvents, selectedEvent]);
+        addRegisteredEvent(sheetName);
         setSelectedEvent(null);
       } else {
         toast.error('Registration failed', { description: data.error });
@@ -109,40 +115,43 @@ const Tickets = () => {
 
         {/* Event List */}
         <div className="space-y-4">
-          {events.map((event, i) => (
-            <motion.div
-              key={event.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="group border border-primary/20 bg-secondary/5 p-8 hover:bg-primary/10 transition-all flex flex-col md:flex-row justify-between items-center gap-6 border-l-4 border-l-transparent hover:border-l-primary"
-            >
-              <div className="text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start gap-2 text-[10px] text-primary tracking-[0.3em] uppercase mb-2 font-bold">
-                  <Star className="w-3 h-3" /> {event.type}
+          {events.map((event, i) => {
+            const isRegistered = isEventRegistered(event.name);
+            return (
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="group border border-primary/20 bg-secondary/5 p-8 hover:bg-primary/10 transition-all flex flex-col md:flex-row justify-between items-center gap-6 border-l-4 border-l-transparent hover:border-l-primary"
+              >
+                <div className="text-center md:text-left">
+                  <div className="flex items-center justify-center md:justify-start gap-2 text-[10px] text-primary tracking-[0.3em] uppercase mb-2 font-bold">
+                    <Star className="w-3 h-3" /> {event.type}
+                  </div>
+                  <h3 className="text-3xl font-bold tracking-tight mb-2 group-hover:text-primary transition-colors">{event.name}</h3>
+                  <div className="flex gap-6 text-xs text-muted-foreground">
+                    <span className="flex items-center gap-2 uppercase font-semibold"><Zap className="w-3 h-3" /> {event.date}</span>
+                    <span className="flex items-center gap-2 uppercase font-semibold"><Trophy className="w-3 h-3 text-yellow-500" /> {event.prize}</span>
+                  </div>
                 </div>
-                <h3 className="text-3xl font-bold tracking-tight mb-2 group-hover:text-primary transition-colors">{event.name}</h3>
-                <div className="flex gap-6 text-xs text-muted-foreground">
-                  <span className="flex items-center gap-2 uppercase font-semibold"><Zap className="w-3 h-3" /> {event.date}</span>
-                  <span className="flex items-center gap-2 uppercase font-semibold"><Trophy className="w-3 h-3 text-yellow-500" /> {event.prize}</span>
-                </div>
-              </div>
-              <Button
-                onClick={() => handleRegisterClick(event.name)}
-                className={`w-full md:w-auto font-bold uppercase py-8 px-12 tracking-widest transition-transform shadow-[0_0_20px_rgba(147,245,255,0.2)] ${registeredEvents.includes(event.name)
+                <Button
+                  onClick={() => handleRegisterClick(event.name)}
+                  className={`w-full md:w-auto font-bold uppercase py-8 px-12 tracking-widest transition-transform shadow-[0_0_20px_rgba(147,245,255,0.2)] ${isRegistered
                     ? 'bg-green-500 text-white hover:bg-green-600'
                     : 'bg-primary text-black hover:scale-105'
-                  }`}
-                disabled={registeredEvents.includes(event.name)}
-              >
-                {registeredEvents.includes(event.name) ? (
-                  <span className="flex items-center gap-2"><Check className="w-5 h-5" /> REGISTERED</span>
-                ) : (
-                  'REGISTER_NOW'
-                )}
-              </Button>
-            </motion.div>
-          ))}
+                    }`}
+                  disabled={isRegistered || isCheckingStatus}
+                >
+                  {isRegistered ? (
+                    <span className="flex items-center gap-2"><Check className="w-5 h-5" /> REGISTERED</span>
+                  ) : (
+                    'REGISTER_NOW'
+                  )}
+                </Button>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
