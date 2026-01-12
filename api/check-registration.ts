@@ -19,8 +19,8 @@ export default async function handler(req: any, res: any) {
             return res.status(400).json({ error: 'Missing email parameter' });
         }
 
-        const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-        const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+        const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || process.env.GOOGLE_CLIENT_EMAIL;
+        const privateKey = (process.env.GOOGLE_PRIVATE_KEY || process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY)?.replace(/\\n/g, '\n');
         const sheetId = process.env.GOOGLE_SHEET_ID;
 
         if (!serviceAccountEmail || !privateKey || !sheetId) {
