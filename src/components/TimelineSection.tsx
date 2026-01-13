@@ -132,18 +132,6 @@ const TimelineSection = () => {
             </div>
           </div>
         </div>
-
-        {/* Timeline Dots */}
-        <div className="flex justify-center gap-2 mt-8">
-          {events.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveIndex(index)}
-              className={`w-3 h-3 transition-all duration-300 ${activeIndex === index ? 'bg-primary scale-125' : 'bg-muted hover:bg-muted-foreground'
-                }`}
-            />
-          ))}
-        </div>
       </motion.div>
     </section>
   );
