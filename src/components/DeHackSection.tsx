@@ -241,7 +241,17 @@ const DeHackSection = () => {
                 <span className="ml-2 text-xs font-mono text-muted-foreground uppercase">Live Feed</span>
               </div>
               <div className="font-mono text-sm text-muted-foreground space-y-2 overflow-hidden p-6 pt-12">
-                {['> initializing...', '> loading participants...', '> BUILD MODE ACTIVATED'].map((line, i) => (
+                {[
+                  '> initializing...', 
+                  '> loading participants...', 
+                  '> fetching hardware profiles...',
+                  '> checking latency...',
+                  '> verifying server status: ONLINE',
+                  '> scanning for vulnerabilities...',
+                  '> establishing secure handshake...',
+                  '> syncing project files...',
+                  '> BUILD MODE ACTIVATED'
+                ].map((line, i) => (
                   <p key={i} className={line.includes('ACTIVATED') ? 'text-primary font-bold' : ''}>{line}</p>
                 ))}
               </div>
