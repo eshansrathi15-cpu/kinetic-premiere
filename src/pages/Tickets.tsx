@@ -9,11 +9,10 @@ import { useRegistrationStatus } from "@/hooks/useRegistrationStatus";
 
 // Map event names to sheet tab names
 const EVENT_SHEET_MAP: Record<string, string> = {
-  "DEHACK": "DEHACK",
-  "BEDROCK": "BEDROCK",
+  "CROWDFUNDING": "DEHACK",
   "WOLF OF DALAL STREET": "WOLF_DALAL",
   "HOW TO TRAIN YOUR DELIVERY TEAM": "DELIVERY_TEAM",
-  "HANGOVER: THE TREASURE HUNT": "HANGOVER",
+  "ESCAPE_ROOM": "HANGOVER",
   "ONE RED PAPERCLIP": "RED_PAPERCLIP",
 };
 
@@ -24,11 +23,10 @@ const Tickets = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const events = [
-    { id: 1, name: "DEHACK", type: "Hackathon", date: "Feb 11-16", prize: "₹1L+" },
-    { id: 2, name: "BEDROCK", type: "Market War", date: "Feb 09-15", prize: "₹50K+" },
+    { id: 1, name: "CROWDFUNDING", type: "Hackathon", date: "Feb 11-16", prize: "₹1L+" },
     { id: 3, name: "WOLF OF DALAL STREET", type: "Trading Sim", date: "Feb 10", prize: "₹25K+" },
     { id: 4, name: "HOW TO TRAIN YOUR DELIVERY TEAM", type: "Ops Challenge", date: "Feb 12", prize: "₹15K+" },
-    { id: 5, name: "HANGOVER: THE TREASURE HUNT", type: "Exploration", date: "Feb 13", prize: "₹20K+" },
+    { id: 5, name: "ESCAPE_ROOM", type: "Exploration", date: "Feb 13", prize: "₹20K+" },
     { id: 6, name: "ONE RED PAPERCLIP", type: "Logistics Challenge", date: "Feb 14", prize: "Priceless" },
   ];
 
