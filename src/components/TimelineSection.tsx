@@ -61,7 +61,15 @@ const TimelineSection = () => {
 
           {/* Timeline Scroll */}
           <motion.div
-            style={{ x }}
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 15, // Reduced from 30 to 15 for a faster scroll
+                ease: "linear",
+              },
+            }}
             className="flex gap-0 py-1 bg-secondary/20 w-max cursor-grab active:cursor-grabbing"
           >
             {events.map((event, index) => (
