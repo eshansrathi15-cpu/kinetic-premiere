@@ -10,7 +10,11 @@ const events = [
   { name: 'ONE RED PAPERCLIP', category: 'CONNECT', desc: 'Build lasting connections', rating: 'G' },
 ];
 
-const EventsGrid = () => {
+interface EventsGridProps {
+  onEventClick?: (event: typeof events[0]) => void;
+}
+
+const EventsGrid = ({ onEventClick }: EventsGridProps) => {
   return (
     <section className="py-24">
       <div className="max-w-7xl mx-auto px-6">
@@ -42,12 +46,13 @@ const EventsGrid = () => {
               whileHover={{ scale: 1.02 }}
               className="group"
             >
-             {/* ADD 'event-tile' class and data attributes here: */}
-<div 
-  className="border-2 border-foreground p-6 h-56 flex flex-col justify-between transition-all duration-300 cursor-pointer group-hover:bg-primary group-hover:border-primary relative overflow-hidden event-tile"
-  data-title={event.name}
-  data-desc={event.desc}
->
+              {/* ADD 'event-tile' class and data attributes here: */}
+              <div
+                className="border-2 border-foreground p-6 h-56 flex flex-col justify-between transition-all duration-300 cursor-pointer group-hover:bg-primary group-hover:border-primary relative overflow-hidden event-tile"
+                data-title={event.name}
+                data-desc={event.desc}
+                onClick={() => onEventClick?.(event)}
+              >
                 {/* Movie rating badge */}
                 <div className="absolute top-3 right-3 w-8 h-8 border border-current flex items-center justify-center">
                   <span className="text-[10px] font-mono font-bold group-hover:text-primary-foreground transition-colors">
@@ -85,3 +90,4 @@ const EventsGrid = () => {
 };
 
 export default EventsGrid;
+

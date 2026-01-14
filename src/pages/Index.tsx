@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import WaveformBackground from '@/components/WaveformBackground';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -7,8 +8,11 @@ import BedRockSection from '@/components/BedRockSection';
 import EventsGrid from '@/components/EventsGrid';
 import SponsorsSection from '@/components/SponsorsSection';
 import Footer from '@/components/Footer';
+import TicketPopup from '@/components/TicketPopup';
 
 const Index = () => {
+  const [selectedEvent, setSelectedEvent] = useState<{ name: string; desc: string } | null>(null);
+
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden film-grain">
       {/* Interactive Scanline Background */}
@@ -21,10 +25,16 @@ const Index = () => {
         <TimelineSection />
         <DeHackSection />
         <BedRockSection />
-        <EventsGrid />
+        <EventsGrid onEventClick={setSelectedEvent} />
         <SponsorsSection />
         <Footer />
       </div>
+
+      <TicketPopup
+        isOpen={!!selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+        event={selectedEvent}
+      />
     </div>
   );
 };
