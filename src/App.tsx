@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import DEHACK from "./pages/DEHACK";
 import BedrockPage from "./pages/BedrockPage";
 import Tickets from "./pages/Tickets";
+import AboutEWeek from "./pages/AboutEWeek";
 
 const queryClient = new QueryClient();
 
@@ -22,10 +23,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/dehack" element={<DEHACK />} />
             <Route path="/bedrock" element={<BedrockPage />} />
-
-            {/* 2. ADD THIS ROUTE LINE BELOW */}
             <Route path="/tickets" element={<Tickets />} />
-
+            <Route path="/about" element={<AboutEWeek />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
@@ -34,4 +33,3 @@ const App = () => (
 );
 
 export default App;
-

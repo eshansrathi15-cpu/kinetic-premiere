@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from '@/components/ui/button';
@@ -6,13 +6,61 @@ import { Terminal, Clock, Film, DollarSign, Rocket, X } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
 
+// --- MATRIX ANIMATION COMPONENT ---
+const MatrixRain = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = canvas.parentElement?.clientWidth || 400;
+    canvas.height = canvas.parentElement?.clientHeight || 400;
+
+    // CHANGED: Shifted from Matrix Green to Cyber Blue (#00d2ff)
+    const color = "#00d2ff"; 
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops: number[] = new Array(columns).fill(1);
+
+    const charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$<>/-+*=%";
+    const characters = charSet.split("");
+
+    const draw = () => {
+      // Create a trailing effect with semi-transparent black
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = color;
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = characters[Math.floor(Math.random() * characters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        // Reset drop to top randomly after hitting bottom
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    };
+
+    const interval = setInterval(draw, 33);
+    return () => clearInterval(interval);
+  }, []);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
+};
+
 const DeHackSection = () => {
   const [isLaunching, setIsLaunching] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
 
-  // Modal and form states
   const [showModal, setShowModal] = useState(false);
   const [teamName, setTeamName] = useState('');
   const [captainName, setCaptainName] = useState('');
@@ -22,7 +70,6 @@ const DeHackSection = () => {
   const [numMembers, setNumMembers] = useState('');
   const [teamMembers, setTeamMembers] = useState([]);
 
-  // Create 8 smoke particles for the plume
   const smokeParticles = Array.from({ length: 8 });
 
   const handleLaunch = () => {
@@ -126,7 +173,6 @@ const DeHackSection = () => {
             className="fixed inset-0 z-[1000] bg-black flex items-center justify-center overflow-hidden"
           >
             <div className="relative flex flex-col items-center">
-              {/* THE SMOKE PLUME: Particles that stay behind the rocket */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2">
                 {smokeParticles.map((_, i) => (
                   <motion.div
@@ -149,7 +195,6 @@ const DeHackSection = () => {
                 ))}
               </div>
 
-              {/* THE ROCKET: Accelerating Upward */}
               <motion.div
                 initial={{ y: 300, opacity: 0 }}
                 animate={{
@@ -164,8 +209,6 @@ const DeHackSection = () => {
                 className="text-primary relative z-10"
               >
                 <Rocket size={100} className="-rotate-45" />
-
-                {/* Engine Glow */}
                 <motion.div
                   animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.2, 1] }}
                   transition={{ duration: 0.1, repeat: Infinity }}
@@ -185,7 +228,6 @@ const DeHackSection = () => {
         )}
       </AnimatePresence>
 
-      {/* 100% RESTORED ORIGINAL DESIGN (REMAINING CODE UNTOUCHED) */}
       <div className="absolute inset-0 opacity-10">
         {[...Array(20)].map((_, i) => (
           <motion.div
@@ -231,29 +273,27 @@ const DeHackSection = () => {
             </div>
           </motion.div>
 
-          {/* Director's Monitor Style (Untouched) */}
           <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} className="relative">
             <div className="aspect-square border-2 border-foreground relative overflow-hidden bg-background">
-              <div className="absolute top-0 left-0 right-0 h-8 bg-secondary/50 border-b border-border flex items-center px-3 gap-2">
+              <div className="absolute top-0 left-0 right-0 h-8 bg-secondary/50 border-b border-border flex items-center px-3 gap-2 z-20">
                 <div className="w-2 h-2 rounded-full bg-destructive" />
                 <div className="w-2 h-2 rounded-full bg-primary" />
                 <div className="w-2 h-2 rounded-full bg-green-500" />
                 <span className="ml-2 text-xs font-mono text-muted-foreground uppercase">Live Feed</span>
               </div>
-              <div className="font-mono text-sm text-muted-foreground space-y-2 overflow-hidden p-6 pt-12">
-                {['> initializing...', '> loading participants...', '> BUILD MODE ACTIVATED'].map((line, i) => (
-                  <p key={i} className={line.includes('ACTIVATED') ? 'text-primary font-bold' : ''}>{line}</p>
-                ))}
+              
+              <div className="absolute inset-0 pt-8">
+                <MatrixRain />
               </div>
-              <div className="absolute bottom-4 right-4 font-mono text-xs text-primary/70">TC 00:00:00:00</div>
-              <div className="absolute top-8 left-0 w-8 h-8 border-t-4 border-l-4 border-primary" />
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-primary" />
+
+              <div className="absolute bottom-4 right-4 font-mono text-xs text-primary/70 z-20 bg-background/50 px-1">TC 00:00:00:00</div>
+              <div className="absolute top-8 left-0 w-8 h-8 border-t-4 border-l-4 border-primary z-20" />
+              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-primary z-20" />
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Registration Modal */}
       <AnimatePresence>
         {showModal && (
           <motion.div
@@ -364,7 +404,7 @@ const DeHackSection = () => {
                   />
                 </div>
 
-                {teamMembers.map((member, index) => (
+                {teamMembers.map((member: any, index: number) => (
                   <div key={index} className="border-l-2 border-primary/30 pl-6 space-y-4">
                     <p className="text-xs text-primary uppercase tracking-widest font-bold">
                       MEMBER {index + 2} DETAILS
