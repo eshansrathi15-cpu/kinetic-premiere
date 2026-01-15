@@ -88,7 +88,7 @@ const Footer = () => {
             <ul className="space-y-2 text-muted-foreground text-sm">
               <li>eweekpilani@gmail.com</li>
               <li className="flex gap-3">
-                <a href="#" className="hover:text-primary transition-colors">Instagram</a>
+                <a href="https://www.instagram.com/eweek2026/?igsh=MTdtaG1rOXdhNmM3dw%3D%3D" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Instagram</a>
                 
                 
               </li>
