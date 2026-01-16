@@ -29,12 +29,12 @@ const EVENT_DETAILS: Record<string, { description: string; prize: string }> = {
     description: "Master the art of logistics and operations! Optimize delivery routes, manage resources, and lead your team to peak efficiency. Tackle real-world operational challenges and prove your strategic prowess.",
     prize: "₹6,000"
   },
-  "ESCAPE_ROOM": {
+  "ESCAPE ROOM": {
     description: "Crack codes, solve puzzles, and race against time! Navigate through intricate challenges in this immersive exploration experience. Work with your team to uncover secrets and escape before time runs out.",
     prize: "₹9,000"
   },
   "ONE RED PAPERCLIP": {
-    description: "Inspired by the legendary trading story, turn a simple red paperclip into something extraordinary! Navigate through strategic trades, negotiate with participants, and transform minimal resources into maximum value in this creative logistics challenge.",
+    description: "One red paperclip, infinite possibilities. Trade your way up and prove that the ultimate prize is just a few deals away. How far can you go?",
     prize: "₹5,500"
   }
 };
@@ -50,7 +50,7 @@ const Tickets = () => {
     { id: 1, name: "CROWDFUNDING", type: "Hackathon", date: "Feb 11-16", prize: "₹1L+" },
     { id: 3, name: "WOLF OF DALAL STREET", type: "Trading Sim", date: "Feb 10", prize: "₹25K+" },
     { id: 4, name: "HOW TO TRAIN YOUR DELIVERY TEAM", type: "Ops Challenge", date: "Feb 12", prize: "₹15K+" },
-    { id: 5, name: "ESCAPE_ROOM", type: "Exploration", date: "Feb 13", prize: "₹20K+" },
+    { id: 5, name: "ESCAPE ROOM", type: "Exploration", date: "Feb 13", prize: "₹20K+" },
     { id: 6, name: "ONE RED PAPERCLIP", type: "Logistics Challenge", date: "Feb 14", prize: "Priceless" },
   ];
 
