@@ -15,6 +15,7 @@ const Dehack = () => {
   const { user, isAuthenticated } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showTimeline, setShowTimeline] = useState(false);
   const [teamName, setTeamName] = useState('');
   const [captainName, setCaptainName] = useState('');
   const [captainEmail, setCaptainEmail] = useState('');
@@ -127,6 +128,15 @@ const Dehack = () => {
       opacity: 1
     }
   };
+
+  const dehackTimeline = [
+    { date: "1st February", task: "Registration Begins & Website goes live", status: "LAUNCH" },
+    { date: "4th February", task: "DeHack kicks off, with hackathon brief and problem solving begins.", status: "KICKOFF" },
+    { date: "5th February", task: "Problem solving, Workshop & solving sprints", status: "IN_PROGRESS" },
+    { date: "6th February", task: "Problem solving, Workshop & solving sprints", status: "IN_PROGRESS" },
+    { date: "7th February", task: "Submission day", status: "FINAL_PUSH" }
+  ];
+
   const faqs = [{
     q: "Who can participate?",
     a: "Open to all BITSians. Whether you are a first-year explorer or a final-year builder, you're welcome."
@@ -158,6 +168,7 @@ const Dehack = () => {
     q: "What happens at the end?",
     a: "Teams will present their working prototypes and slides to the judges in a final showcase."
   }];
+
   return <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden film-grain">
     <WaveformBackground />
 
@@ -274,24 +285,24 @@ const Dehack = () => {
           <Layers className="w-6 h-6" /> // DEHACK_SUB_EVENTS
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
-          {[{
-            icon: <Code />,
-            title: "The Build-Off",
-            desc: "Core 54-hour sprint protocol. Locked-in building."
-          }, {
-            icon: <Lightbulb />,
-            title: "Ideation Matrix",
-            desc: "Workshop: Reframing problems into scalable solutions."
-          }, {
-            icon: <Zap />,
-            title: "The Showcase",
-            desc: "Final presentation to the panel of Professors. High stakes."
-          }].map((ev, i) => <div key={i} className="p-8 border border-border bg-secondary/5 backdrop-blur-sm group hover:border-primary/50 transition-all cursor-wait">
-            <div className="text-primary mb-4">{ev.icon}</div>
-            <h4 className="text-foreground font-mono font-bold uppercase mb-2 tracking-tight">{ev.title}</h4>
+          <div onClick={() => setShowTimeline(true)} className="p-8 border border-border bg-secondary/5 backdrop-blur-sm group hover:border-primary/50 transition-all cursor-pointer">
+            <div className="text-primary mb-4"><Code /></div>
+            <h4 className="text-foreground font-mono font-bold uppercase mb-2 tracking-tight">Timeline</h4>
             <p className="text-xs text-muted-foreground font-sans uppercase tracking-widest">Status: PENDING_MANIFEST...</p>
-            <p className="text-sm text-muted-foreground mt-4">{ev.desc}</p>
-          </div>)}
+            <p className="text-sm text-muted-foreground mt-4">Find how DeHack fits into E-Week.</p>
+          </div>
+          <div className="p-8 border border-border bg-secondary/5 backdrop-blur-sm group hover:border-primary/50 transition-all cursor-wait">
+            <div className="text-primary mb-4"><Lightbulb /></div>
+            <h4 className="text-foreground font-mono font-bold uppercase mb-2 tracking-tight">Rulebook</h4>
+            <p className="text-xs text-muted-foreground font-sans uppercase tracking-widest">Status: PENDING_MANIFEST...</p>
+            <p className="text-sm text-muted-foreground mt-4">Plus FAQs.</p>
+          </div>
+          <div className="p-8 border border-border bg-secondary/5 backdrop-blur-sm group hover:border-primary/50 transition-all cursor-wait">
+            <div className="text-primary mb-4"><Zap /></div>
+            <h4 className="text-foreground font-mono font-bold uppercase mb-2 tracking-tight">Dehack Website</h4>
+            <p className="text-xs text-muted-foreground font-sans uppercase tracking-widest">Status: PENDING_MANIFEST...</p>
+            <p className="text-sm text-muted-foreground mt-4">Find out about Dehack here.</p>
+          </div>
         </div>
       </motion.div>
 
@@ -314,6 +325,64 @@ const Dehack = () => {
         </div>
       </motion.div>
     </div>
+
+    {/* Timeline Modal */}
+    <AnimatePresence>
+      {showTimeline && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xl"
+          onClick={() => setShowTimeline(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{
+              scale: 1,
+              opacity: 1,
+              transition: { type: "spring", damping: 20, stiffness: 300 }
+            }}
+            exit={{ scale: 0.5, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-lg bg-background border-2 border-primary/50 p-10 film-grain shadow-2xl"
+          >
+            <button
+              onClick={() => setShowTimeline(false)}
+              className="absolute top-6 right-6 text-primary hover:rotate-90 transition-transform duration-200"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <div className="mb-10 text-center font-mono">
+              <h2 className="text-4xl font-bold uppercase tracking-tighter text-primary mb-2 flex items-center justify-center gap-3">
+                <Clock className="w-8 h-8" /> TIMELINE
+              </h2>
+              <p className="text-[10px] text-muted-foreground uppercase tracking-[0.4em]">
+                DEHACK_OPERATIONS_HUB
+              </p>
+            </div>
+
+            <div className="space-y-12">
+              {dehackTimeline.map((item, idx) => (
+                <div key={idx} className="flex gap-6 border-l border-primary/30 pl-6 relative font-mono">
+                  <div className="absolute -left-[16px] top-0 w-8 h-8 bg-background border border-primary/50 flex items-center justify-center">
+                    <Zap className="w-4 h-4 text-primary" />
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="flex items-baseline gap-3 mb-2">
+                      <span className="text-primary font-bold text-xl tracking-tighter uppercase">{item.date}</span>
+                      <span className="text-[8px] border border-primary/20 px-2 py-0.5 text-muted-foreground uppercase tracking-widest">{item.status}</span>
+                    </div>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{item.task}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
 
     {/* Registration Modal */}
     <AnimatePresence>
@@ -472,4 +541,5 @@ const Dehack = () => {
     </AnimatePresence>
   </div>;
 };
+
 export default Dehack;
