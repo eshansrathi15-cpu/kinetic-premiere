@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Terminal, Cpu, Zap, Shield, Trophy, Calendar, Clock, MapPin, MessageSquare, HelpCircle, ChevronRight, Layers, Code, Lightbulb, Radio, X } from "lucide-react";
+import { ArrowLeft, Terminal, Cpu, Zap, Shield, Trophy, Calendar, Clock, MapPin, MessageSquare, HelpCircle, ChevronRight, Layers, Code, Lightbulb, Radio, X, BookOpen, ScrollText } from "lucide-react";
 import WaveformBackground from "@/components/WaveformBackground";
 import { Button } from "@/components/ui/button";
 import { useAuth } from '@/contexts/AuthContext';
@@ -16,6 +16,7 @@ const Dehack = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showTimeline, setShowTimeline] = useState(false);
+  const [showRulebook, setShowRulebook] = useState(false);
   const [teamName, setTeamName] = useState('');
   const [captainName, setCaptainName] = useState('');
   const [captainEmail, setCaptainEmail] = useState('');
@@ -289,9 +290,9 @@ const Dehack = () => {
             <div className="text-primary mb-4"><Code /></div>
             <h4 className="text-foreground font-mono font-bold uppercase mb-2 tracking-tight">Timeline</h4>
             <p className="text-xs text-muted-foreground font-sans uppercase tracking-widest">Status: PENDING_MANIFEST...</p>
-            <p className="text-sm text-muted-foreground mt-4">Find how DeHack fits into E-Week.</p>
+            <p className="text-sm text-muted-foreground mt-4">Find how Dehack fits into E-Week.</p>
           </div>
-          <div className="p-8 border border-border bg-secondary/5 backdrop-blur-sm group hover:border-primary/50 transition-all cursor-wait">
+          <div onClick={() => setShowRulebook(true)} className="p-8 border border-border bg-secondary/5 backdrop-blur-sm group hover:border-primary/50 transition-all cursor-pointer">
             <div className="text-primary mb-4"><Lightbulb /></div>
             <h4 className="text-foreground font-mono font-bold uppercase mb-2 tracking-tight">Rulebook</h4>
             <p className="text-xs text-muted-foreground font-sans uppercase tracking-widest">Status: PENDING_MANIFEST...</p>
@@ -378,6 +379,117 @@ const Dehack = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+
+    {/* Rulebook Modal */}
+    <AnimatePresence>
+      {showRulebook && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xl"
+          onClick={() => setShowRulebook(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{
+              scale: 1,
+              opacity: 1,
+              transition: { type: "spring", damping: 20, stiffness: 300 }
+            }}
+            exit={{ scale: 0.5, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-4xl max-h-[85vh] overflow-y-auto bg-background border-2 border-primary/50 p-12 film-grain shadow-2xl custom-scrollbar"
+          >
+            <button
+              onClick={() => setShowRulebook(false)}
+              className="absolute top-6 right-6 text-primary hover:rotate-90 transition-transform duration-200"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <div className="mb-12 text-center font-mono">
+              <h2 className="text-5xl font-bold uppercase tracking-tighter text-primary mb-4 flex items-center justify-center gap-4">
+                <BookOpen className="w-10 h-10" /> OFFICIAL RULEBOOK
+              </h2>
+              <p className="text-[12px] text-muted-foreground uppercase tracking-[0.6em] border-y border-primary/20 py-2 inline-block">
+                PROTOCOL_DOCKET_v.2025
+              </p>
+            </div>
+
+            <div className="space-y-10 font-mono text-sm text-muted-foreground leading-relaxed">
+              <section className="border-l-4 border-primary/40 pl-6 py-2">
+                <h3 className="text-primary font-bold text-lg mb-4 uppercase tracking-widest">1. Team Formation & Eligibility</h3>
+                <ul className="space-y-2 list-disc list-inside">
+                  <li>Teams may have 1–5 participants.</li>
+                  <li>One person registers the team and lists all members; limited flexibility to substitute members before the hackathon starts.</li>
+                  <li>Each participant may be part of only one team.</li>
+                  <li>No team changes are allowed once the hackathon begins.</li>
+                  <li>Teams must choose one track only.</li>
+                  <li>All participants must follow the event code of conduct.</li>
+                </ul>
+              </section>
+
+              <section className="border-l-4 border-primary/40 pl-6 py-2">
+                <h3 className="text-primary font-bold text-lg mb-4 uppercase tracking-widest">2. Track Selection & Problem Definition</h3>
+                <ul className="space-y-2 list-disc list-inside">
+                  <li>Solutions must align with the chosen track.</li>
+                  <li>Teams must define their own problem statement, except in the Company Sponsorship track.</li>
+                  <li>Problems must be real or plausible and scoped appropriately for the hackathon timeline.</li>
+                  <li>Track switching is not allowed once development begins.</li>
+                  <li>Track-specific rules and guidelines must be followed.</li>
+                  <li>Organizers may reassign projects to a more suitable track if required.</li>
+                  <li>Teams may work on existing or common ideas; innovation is not mandatory.</li>
+                  <li>Judging will focus on the quality of execution, not novelty alone.</li>
+                </ul>
+              </section>
+
+              <section className="border-l-4 border-primary/40 pl-6 py-2">
+                <h3 className="text-primary font-bold text-lg mb-4 uppercase tracking-widest">3. Development & Build Rules</h3>
+                <ul className="space-y-2 list-disc list-inside">
+                  <li>All work must be done during the official hackathon period.</li>
+                  <li>Open-source tools, APIs, frameworks, templates, and AI tools are allowed with proper attribution.</li>
+                  <li>Starter kits and boilerplates are permitted; fully pre-built projects are not.</li>
+                  <li>Teams must understand and explain every part of their solution.</li>
+                  <li>Projects must comply with ethical, legal, and data-privacy standards.</li>
+                  <li>Any hardware used must be safe and organizer-approved.</li>
+                  <li>Plagiarism or misrepresentation will result in disqualification.</li>
+                </ul>
+              </section>
+
+              <section className="border-l-4 border-primary/40 pl-6 py-2">
+                <h3 className="text-primary font-bold text-lg mb-4 uppercase tracking-widest">4. Submission Requirements</h3>
+                <ul className="space-y-2 list-disc list-inside">
+                  <li>All projects must be submitted before the deadline.</li>
+                  <li>Submissions must include: Project name and track, Problem statement, Solution overview, Demo link or live demo, Document showing iterations, MVP.</li>
+                  <li>Incomplete submissions will not be evaluated (partially built products may still be considered).</li>
+                  <li>Teams are responsible for ensuring their demo works at submission time.</li>
+                  <li>Submission format details will be shared in advance.</li>
+                  <li>Late submissions will not be accepted.</li>
+                </ul>
+              </section>
+
+              <section className="border-l-4 border-primary/40 pl-6 py-2">
+                <h3 className="text-primary font-bold text-lg mb-4 uppercase tracking-widest">5. Conduct, Ethics & Disqualification</h3>
+                <ul className="space-y-2 list-disc list-inside">
+                  <li>Participants must behave respectfully at all times.</li>
+                  <li>Harassment, discrimination, or disruptive behavior is strictly prohibited.</li>
+                  <li>Solutions must not promote harm, hate, or illegal activity.</li>
+                  <li>Attempts to manipulate judging are forbidden.</li>
+                  <li>Rule violations may lead to warnings or disqualification.</li>
+                  <li>Organizers may remove any participant or team at their discretion.</li>
+                  <li>Disqualified teams forfeit prize eligibility.</li>
+                </ul>
+              </section>
+            </div>
+
+            <div className="mt-16 p-6 bg-primary/10 border-2 border-primary/30 text-lg text-primary font-bold uppercase tracking-widest text-center font-mono">
+              "VALIDATED IDEAS TO SCALABLE PRODUCTS"
             </div>
           </motion.div>
         </motion.div>
