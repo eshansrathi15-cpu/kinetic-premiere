@@ -106,7 +106,7 @@ const BedrockPage = () => {
         { time: "28th Jan Onwards", event: "Team Qualifiers: Test your team's creativity. 30 mins of brainstorming! Registrations close on 1st Feb EOD.", status: "LIVE", icon: <Brain className="w-5 h-5 text-primary" /> },
         { time: "4th Feb", event: "Online Interactions: Tell us more about your ideas, skills and team.", status: "UPCOMING", icon: <Users className="w-5 h-5 text-primary" /> },
         { time: "6th Feb", event: "The Auction: Get ready with your bids and negotiating skills to nab your team the best restaurant!", status: "UPCOMING", icon: <Gavel className="w-5 h-5 text-primary" /> },
-        { time: "8th Jan", event: "BEDROCK: C'not is yours for the taking!", status: "FINALE", icon: <Crown className="w-5 h-5 text-primary" /> }
+        { time: "8th Feb", event: "BEDROCK: C'not is yours for the taking!", status: "FINALE", icon: <Crown className="w-5 h-5 text-primary" /> }
     ];
 
     const features = [{
