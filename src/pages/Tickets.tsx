@@ -14,7 +14,7 @@ const EVENT_SHEET_MAP: Record<string, string> = {
   "HOW TO TRAIN YOUR DELIVERY TEAM": "DELIVERY_TEAM",
   "MISIRLOU: A KNIVES OUT MYSTERY": "KNIVES_OUT",
   "ONE RED PAPERCLIP": "RED_PAPERCLIP",
-  "WING TRADE": "WING_TRADE",
+  "WHAT DA FUKREY": "WING_TRADE",
 };
 
 const EVENT_DETAILS: Record<string, { description: string; prize: string }> = {
@@ -38,7 +38,7 @@ const EVENT_DETAILS: Record<string, { description: string; prize: string }> = {
     description: "One lone paperclip, infinite possibilities. Trade your way up and prove that the ultimate prize is just a few deals away. How far can you go?",
     prize: "TBA"
   },
-  "WING TRADE": {
+  "WHAT DA FUKREY": {
     description: "Tired of your wingies? Sell them. Navigate the ultimate trading challenge where strategy meets negotiation in this high-stakes marketplace.",
     prize: "TBA"
   }
@@ -53,7 +53,7 @@ const Tickets = () => {
 
   const events = [
     { id: 1, name: "MISSION:POSSIBLE?", type: "Crowdfunding", prize: "$$$" },
-    { id: 2, name: "WING TRADE", type: "Online Game", prize: "$$$" },
+    { id: 2, name: "WHAT DA FUKREY", type: "Online Game", prize: "$$$" },
     { id: 3, name: "WOLF OF DALAL STREET", type: "Trading Sim", prize: "$$$" },
     { id: 4, name: "HOW TO TRAIN YOUR DELIVERY TEAM", type: "Ops Challenge", prize: "$$$" },
     { id: 5, name: "MISIRLOU: A KNIVES OUT MYSTERY", type: "Exploration", prize: "$$$" },
