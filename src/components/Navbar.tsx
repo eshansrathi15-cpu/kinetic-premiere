@@ -46,7 +46,7 @@ const Navbar = () => {
 
       {/* Center Nav Links */}
       <div className="hidden md:flex items-center gap-8">
-        {['SHOWTIME', 'FEATURES', 'CAREER FAIR', 'EBUCKS'].map(item => (
+        {['SHOWTIME', 'FEATURES', 'E-WEEK HITS', 'EBUCKS'].map(item => (
           <button
             key={item}
             onClick={() => scrollToSection(item === 'CAREER FAIR' ? 'career-fair' : item.toLowerCase())}
