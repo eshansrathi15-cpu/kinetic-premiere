@@ -91,7 +91,10 @@ export default async function handler(req: any, res: any) {
             'WOLF_DALAL!C:C',
             'DELIVERY_TEAM!C:C',
             'HANGOVER!C:C',
-            'RED_PAPERCLIP!C:C'
+            'RED_PAPERCLIP!C:C',
+            'CROWDFUNDING!C:C',
+            'KNIVES_OUT!C:C',
+            'WING_TRADE!C:C'
         ];
 
         const sheetsUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values:batchGet?${ranges.map(r => `ranges=${encodeURIComponent(r)}`).join('&')}`;
@@ -113,7 +116,7 @@ export default async function handler(req: any, res: any) {
         const valueRanges = result.valueRanges;
 
         const registeredEvents: string[] = [];
-        const sheetNames = ['BEDROCK', 'DEHACK', 'WOLF_DALAL', 'DELIVERY_TEAM', 'HANGOVER', 'RED_PAPERCLIP'];
+        const sheetNames = ['BEDROCK', 'DEHACK', 'WOLF_DALAL', 'DELIVERY_TEAM', 'HANGOVER', 'RED_PAPERCLIP', 'CROWDFUNDING', 'KNIVES_OUT', 'WING_TRADE'];
 
         valueRanges.forEach((rangeData: any, index: number) => {
             if (rangeData.values) {

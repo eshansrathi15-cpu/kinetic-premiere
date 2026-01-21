@@ -7,15 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import { useRegistrationStatus } from "@/hooks/useRegistrationStatus";
 
-// Map event names to sheet tab names
-const EVENT_SHEET_MAP: Record<string, string> = {
-  "MISSION:POSSIBLE?": "CROWDFUNDING",
-  "WOLF OF DALAL STREET": "WOLF_DALAL",
-  "HOW TO TRAIN YOUR DELIVERY TEAM": "DELIVERY_TEAM",
-  "MISIRLOU": "KNIVES_OUT",
-  "ONE RED PAPERCLIP": "RED_PAPERCLIP",
-  "WHAT DA FUKREY": "WING_TRADE",
-};
+import { EVENT_SHEET_MAP } from "@/lib/constants";
 
 const EVENT_DETAILS: Record<string, { description: string; prize: string }> = {
   "MISSION:POSSIBLE?": {
@@ -142,9 +134,9 @@ const Tickets = () => {
         </div>
 
         {/* Notice Banner - Now as Subheading */}
-        <motion.div 
-          initial={{ opacity: 0, y: -10 }} 
-          animate={{ opacity: 1, y: 0 }} 
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
           className="mb-12 border-l-4 border-primary bg-primary/5 p-4 backdrop-blur-sm"
         >
           <p className="text-sm md:text-base font-mono text-primary uppercase tracking-[0.2em] leading-relaxed font-bold">
@@ -307,7 +299,7 @@ const Tickets = () => {
                   <p className="text-foreground font-mono">{user?.name}</p>
                   <p className="text-sm text-muted-foreground">{user?.email}</p>
                 </div>
-                
+
                 <div className="border border-primary/20 bg-primary/5 p-3 rounded-sm">
                   <p className="text-[10px] md:text-xs font-mono text-primary uppercase tracking-widest leading-relaxed">
                     {">"} You'll be emailed a community link upon registering!

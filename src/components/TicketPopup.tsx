@@ -4,6 +4,8 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { toast } from 'sonner';
 import { Loader2, Check } from 'lucide-react';
 
+import { EVENT_SHEET_MAP } from '@/lib/constants';
+
 interface TicketPopupProps {
     isOpen: boolean;
     onClose: () => void;
@@ -42,9 +44,9 @@ const TicketPopup = ({ isOpen, onClose, event }: TicketPopupProps) => {
                     email: userInfo.email,
                     picture: userInfo.picture,
                 };
-                
-                 localStorage.setItem('user', JSON.stringify(credential));
-                 window.location.reload(); 
+
+                localStorage.setItem('user', JSON.stringify(credential));
+                window.location.reload();
             } catch (error) {
                 console.error("Login Failed", error);
                 toast.error("Login failed. Please try again.");
@@ -61,7 +63,13 @@ const TicketPopup = ({ isOpen, onClose, event }: TicketPopupProps) => {
 
         setIsRegistering(true);
         try {
-            const sheetName = event?.name.replace(/ /g, '_').toUpperCase() || 'UNKNOWN_EVENT';
+            const sheetName = event?.name ? EVENT_SHEET_MAP[event.name] : null;
+
+            if (!sheetName) {
+                console.error("Unknown event:", event?.name);
+                toast.error("Configuration error. Please try again later.");
+                return;
+            }
 
             const response = await fetch('/api/register', {
                 method: 'POST',
@@ -71,7 +79,7 @@ const TicketPopup = ({ isOpen, onClose, event }: TicketPopupProps) => {
                     row_data: [
                         user.name,
                         user.email,
-                        new Date().toISOString(), 
+                        new Date().toISOString(),
                     ]
                 })
             });
@@ -101,7 +109,7 @@ const TicketPopup = ({ isOpen, onClose, event }: TicketPopupProps) => {
                     </div>
                     <h2 id="ticket-title">{event.name}</h2>
                     <p id="ticket-desc">{event.desc}</p>
-                    
+
                     {/* Community link reminder remains untouched */}
                     <p className="mt-4 text-[10px] md:text-xs font-mono text-cyan-400 opacity-80 uppercase tracking-widest leading-relaxed">
                         {">"} You'll get an email with the community link upon registering!
@@ -113,7 +121,7 @@ const TicketPopup = ({ isOpen, onClose, event }: TicketPopupProps) => {
                 </div>
                 <div className="ticket-rip-line"></div>
                 <div className="ticket-stub">
-                    <button 
+                    <button
                         className={`register-btn flex items-center justify-center gap-2 ${isRegistered ? 'bg-transparent text-cyan-400 border-cyan-400' : ''}`}
                         onClick={handleRegister}
                         disabled={isRegistering || isRegistered}
