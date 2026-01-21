@@ -123,7 +123,7 @@ const AboutEWeek = () => {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <a 
             href="/" 
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group"
+            className="flex items-center gap-2 text-primary hover:opacity-80 transition-all group"
           >
             <motion.div
               whileHover={{ x: -4 }}
@@ -131,7 +131,7 @@ const AboutEWeek = () => {
             >
               <ArrowLeft className="w-4 h-4" />
             </motion.div>
-            <span className="font-mono text-sm">BACK TO HOME</span>
+            <span className="font-mono text-sm font-bold tracking-widest uppercase">BACK TO HOME</span>
           </a>
           
           <motion.div 
@@ -176,7 +176,7 @@ const AboutEWeek = () => {
             >
               About E-Week
             </motion.h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-sans">
               A CEL Production • February 2-9, 2026
             </p>
           </motion.div>
@@ -193,7 +193,7 @@ const AboutEWeek = () => {
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto text-center mb-20"
           >
-            <p className="text-lg md:text-xl leading-relaxed text-muted-foreground">
+            <p className="text-lg md:text-xl leading-relaxed text-muted-foreground font-sans">
               A legacy initiative to cultivate an entrepreneurial spirit through fun events across the campus. Students learn skills including pitching, negotiating, and generally, just have a lot of fun. We’re bringing you high-stakes games where you get to be an entrepreneur, a stock market trader, a restaurateur, or exactly who you want to be. Cash prizes await the winners!
             </p>
           </motion.div>
@@ -324,7 +324,7 @@ const AboutEWeek = () => {
             >
               — JOIN US —
             </motion.p>
-            <p className="text-muted-foreground mb-8">
+            <p className="text-muted-foreground mb-8 font-sans">
               Be part of the legacy
             </p>
           </motion.div>

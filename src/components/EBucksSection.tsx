@@ -5,13 +5,13 @@ import { useState } from 'react';
 const EBucksSection = () => {
   const cards = [
     {
-      title: "WHAT IS E-BUCKS?",
-      description: "E-BUCKS is E-Week's virtual currency. Earn it by participating in events. Use your E-BUCKS to bet on IPOs in Wolf of Dalal Street and multiply your wealth!",
+      title: "WHAT ARE E-BUCKS?",
+      description: "Your golden ticket to Bedrock! Players can earn E-Bucks by participating in and winning events.",
       icon: <Coins className="w-8 h-8 text-primary" />,
     },
     {
       title: "BEDROCK ACCESS",
-      description: "The top earners secure a guaranteed spot in Bedrock! Unlock special prizes and opportunities.",
+      description: "By the end of the week, the team with the most cumulative E-Bucks can cash them in for a chance to dominate C'Not!",
       icon: <Trophy className="w-8 h-8 text-primary" />,
     }
   ];
@@ -48,14 +48,9 @@ const EBucksSection = () => {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      x.set(mouseX); // For the gradient center
-      y.set(mouseY); // For the gradient center
+      x.set(mouseX); 
+      y.set(mouseY); 
       
-      // We use the offset from center for the rotation
-      const rotateXVal = (e.clientY - (rect.top + centerY));
-      const rotateYVal = (e.clientX - (rect.left + centerX));
-      // Manual set isn't needed here if we rely on the useTransform above, 
-      // but ensuring the values update the transform:
       x.set(mouseX - centerX);
       y.set(mouseY - centerY);
     };
@@ -129,7 +124,8 @@ const EBucksSection = () => {
           <div className="mb-6 text-primary group-hover:scale-110 transition-transform duration-500">
             {card.icon}
           </div>
-          <h3 className="text-xl font-mono font-bold mb-4 tracking-[0.25em] text-zinc-100 uppercase">
+          {/* UPDATED HEADING STYLE: Larger, bolder, tighter tracking */}
+          <h3 className="text-3xl font-mono font-black mb-6 tracking-tight text-zinc-100 uppercase leading-none group-hover:text-primary transition-colors">
             {card.title}
           </h3>
           <p className="text-zinc-400 font-sans text-sm leading-relaxed antialiased">
@@ -148,9 +144,10 @@ const EBucksSection = () => {
             </span>
           </div>
           
-          <div className="flex -space-x-3 opacity-40">
-            <div className="w-8 h-8 rounded-full bg-zinc-600 border border-white/10" />
-            <div className="w-8 h-8 rounded-full bg-zinc-800 border border-white/10" />
+          {/* MASTERCARD CIRCLES REMOVED AS REQUESTED */}
+          <div className="flex flex-col items-end opacity-20">
+             <div className="w-12 h-1 bg-white/20 rounded-full mb-1" />
+             <div className="w-8 h-1 bg-white/20 rounded-full" />
           </div>
         </div>
       </motion.div>

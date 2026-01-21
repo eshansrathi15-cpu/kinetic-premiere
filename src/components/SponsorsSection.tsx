@@ -83,7 +83,7 @@ const SponsorsSection = () => {
         once: true
       }} className="text-center mt-12 text-muted-foreground font-mono text-sm">
           Presented by{' '}
-          <a href="#" className="text-primary hover:underline">
+          <a href="#" className="text-primary">
             CEL TEAM
           </a>
         </motion.p>

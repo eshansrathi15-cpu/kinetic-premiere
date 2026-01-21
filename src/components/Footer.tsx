@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Film } from 'lucide-react';
 import celLogo from '@/assets/cel-logo.png';
+
 const Footer = () => {
   const [isLaunching, setIsLaunching] = useState(false);
   const [particles, setParticles] = useState<{
     id: number;
     x: number;
   }[]>([]);
+
   const handleRocketClick = () => {
     if (isLaunching) return;
 
@@ -35,6 +37,7 @@ const Footer = () => {
       setParticles([]);
     }, 1500);
   };
+
   return <footer className="py-16 border-t border-border relative bg-background">
       {/* Film credits style border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-6">
@@ -64,7 +67,7 @@ const Footer = () => {
                 <p className="text-muted-foreground tracking-widest font-sans text-xs">A CEL Production</p>
               </div>
             </div>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-sm font-sans">
               The premier entrepreneurship week.
               <br />
               February 02-09, 2026.
@@ -74,13 +77,11 @@ const Footer = () => {
           {/* Connect */}
           <div>
             <h4 className="font-mono font-bold mb-4 text-sm tracking-wider">CONNECT</h4>
-            <ul className="space-y-2 text-muted-foreground text-sm">
+            <ul className="space-y-2 text-muted-foreground text-sm font-sans">
               <li><a href="/about" className="hover:text-primary transition-colors">About E-Week</a></li>
               <li>eweekpilani@gmail.com</li>
               <li className="flex gap-3">
                 <a href="https://www.instagram.com/eweek2026/?igsh=MTdtaG1rOXdhNmM3dw%3D%3D" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Instagram</a>
-                
-                
               </li>
             </ul>
           </div>
@@ -99,6 +100,11 @@ const Footer = () => {
           }} whileTap={{
             scale: 0.9
           }} className="relative z-10 group" aria-label="Launch rocket to scroll to top">
+              {/* GO TO TOP label - Now permanently visible */}
+              <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-mono text-muted-foreground transition-opacity whitespace-nowrap">
+                GO TO TOP
+              </span>
+              
               <motion.svg width="40" height="60" viewBox="0 0 40 60" fill="none" className="cursor-pointer" animate={isLaunching ? {
               y: -1000
             } : {
