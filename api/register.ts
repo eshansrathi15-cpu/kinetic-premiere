@@ -23,9 +23,18 @@ export default async function handler(req: any, res: any) {
         const privateKey = (process.env.GOOGLE_PRIVATE_KEY || process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY)?.replace(/\\n/g, '\n');
         const sheetId = process.env.GOOGLE_SHEET_ID;
 
+        // Debug logging (Careful not to log full keys)
+        console.log(`[Register] Attempting to write to Sheet ID: ${sheetId?.slice(0, 5)}...`);
+        console.log(`[Register] Target Tab: "${sheet_name}"`);
+        console.log(`[Register] Service Account: ${serviceAccountEmail}`);
+
         if (!serviceAccountEmail || !privateKey || !sheetId) {
-            console.error('Missing environment variables');
-            return res.status(500).json({ error: 'Server configuration error' });
+            console.error('[Register] Missing environment variables:', {
+                hasEmail: !!serviceAccountEmail,
+                hasKey: !!privateKey,
+                hasSheetId: !!sheetId
+            });
+            return res.status(500).json({ error: 'Server configuration error (Missing Credentials)' });
         }
 
         // Create JWT for service account authentication
@@ -75,8 +84,8 @@ export default async function handler(req: any, res: any) {
 
         if (!tokenResponse.ok) {
             const tokenError = await tokenResponse.text();
-            console.error('Token exchange failed:', tokenError);
-            return res.status(500).json({ error: 'Failed to authenticate with Google' });
+            console.error('[Register] Token exchange failed:', tokenError);
+            return res.status(500).json({ error: 'Failed to authenticate with Google (Token Exchange Failed)' });
         }
 
         const tokenData = await tokenResponse.json();
@@ -97,9 +106,32 @@ export default async function handler(req: any, res: any) {
         });
 
         if (!sheetsResponse.ok) {
-            const sheetsError = await sheetsResponse.text();
-            console.error('Sheets API error:', sheetsError);
-            return res.status(500).json({ error: 'Failed to write to Google Sheets' });
+            const sheetsErrorRaw = await sheetsResponse.text();
+            let errorMessage = `Failed to write to Google Sheets. Status: ${sheetsResponse.status}`;
+            console.error('[Register] Sheets API error raw:', sheetsErrorRaw);
+
+            try {
+                const errorJson = JSON.parse(sheetsErrorRaw);
+                const googleMessage = errorJson.error?.message;
+
+                if (sheetsResponse.status === 403) {
+                    errorMessage = `Permission denied. Ensure '${serviceAccountEmail}' is an Editor on the Sheet.`;
+                } else if (sheetsResponse.status === 404) {
+                    errorMessage = `Sheet not found. Check GOOGLE_SHEET_ID (${sheetId}).`;
+                } else if (sheetsResponse.status === 400) {
+                    if (googleMessage?.includes('Unable to parse range')) {
+                        errorMessage = `Tab '${sheet_name}' not found in the Sheet. Please check the tab name.`;
+                    } else {
+                        errorMessage = `Bad Request: ${googleMessage}`;
+                    }
+                } else if (googleMessage) {
+                    errorMessage = `Google Error: ${googleMessage}`;
+                }
+            } catch (e) {
+                // Keep default message if parsing fails
+            }
+
+            return res.status(sheetsResponse.status).json({ error: errorMessage });
         }
 
         const result = await sheetsResponse.json();
@@ -110,7 +142,7 @@ export default async function handler(req: any, res: any) {
         });
 
     } catch (error) {
-        console.error('Registration error:', error);
+        console.error('[Register] Internal error:', error);
         return res.status(500).json({ error: 'Internal server error' });
     }
 }

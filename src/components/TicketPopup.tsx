@@ -84,13 +84,16 @@ const TicketPopup = ({ isOpen, onClose, event }: TicketPopupProps) => {
                 })
             });
 
-            if (!response.ok) throw new Error('Registration failed');
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Registration failed');
+            }
 
             setIsRegistered(true);
             toast.success(`Successfully registered for ${event?.name}!`);
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
-            toast.error("Registration failed. Please try again.");
+            toast.error(error.message || "Registration failed. Please try again.");
         } finally {
             setIsRegistering(false);
         }
