@@ -20,8 +20,8 @@ const FeatureHighlights = () => {
   ];
 
   return (
-    // Added id="career-fair" to the section tag below
-    <section id="career-fair" className="py-24 relative z-10 font-mono">
+    // Updated the ID below from "career-fair" to "hits" to match your Navbar link
+    <section id="hits" className="py-24 relative z-10 font-mono">
       <div className="max-w-6xl mx-auto px-6">
         
         {/* Production Label - Centered */}
@@ -50,7 +50,6 @@ const FeatureHighlights = () => {
           E-WEEK '26 <span className="text-primary text-shadow-glow">HITS</span>
         </motion.h2>
 
-        {/* Increased gap and container width for bigger boxes */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {highlights.map((item, i) => (
             <motion.div
@@ -59,7 +58,6 @@ const FeatureHighlights = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              // Increased padding (p-12) and min-height (min-h-[400px]) for bigger boxes
               className="group border border-primary/20 bg-background/40 backdrop-blur-md p-12 min-h-[400px] flex flex-col justify-between hover:bg-primary/5 transition-all duration-500 border-l-4 border-l-primary/50 hover:border-l-primary relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-opacity">

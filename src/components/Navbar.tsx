@@ -49,7 +49,12 @@ const Navbar = () => {
         {['SHOWTIME', 'FEATURES', 'E-WEEK HITS', 'EBUCKS'].map(item => (
           <button
             key={item}
-            onClick={() => scrollToSection(item === 'CAREER FAIR' ? 'career-fair' : item.toLowerCase())}
+            onClick={() => {
+              // Mapping "E-WEEK HITS" to the ID "hits" used in FeatureHighlights.tsx
+              if (item === 'E-WEEK HITS') scrollToSection('hits');
+              else if (item === 'CAREER FAIR') scrollToSection('career-fair');
+              else scrollToSection(item.toLowerCase());
+            }}
             className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors relative group"
           >
             {item}
