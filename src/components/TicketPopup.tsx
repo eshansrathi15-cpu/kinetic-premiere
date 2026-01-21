@@ -179,22 +179,34 @@ const TicketPopup = ({ isOpen, onClose, event }: TicketPopupProps) => {
                 </div>
                 <div className="ticket-rip-line"></div>
                 <div className="ticket-stub">
-                    <button
-                        className={`register-btn flex items-center justify-center gap-2 ${isRegistered ? 'bg-transparent text-cyan-400 border-cyan-400' : ''}`}
-                        onClick={handleRegister}
-                        disabled={isRegistering || isRegistered}
-                    >
-                        {isRegistering ? (
-                            <Loader2 className="w-4 h-4 animate-spin" />
-                        ) : isRegistered ? (
-                            <>
-                                <span>REGISTERED</span>
-                                <Check className="w-4 h-4" />
-                            </>
-                        ) : (
-                            user ? "REGISTER" : "LOGIN TO REGISTER"
-                        )}
-                    </button>
+
+                    {event.name === "WHAT DA FUKREY" || event.name === "MISSION:POSSIBLE?" ? (
+                        <a
+                            href={event.name === "WHAT DA FUKREY" ? "#" : "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="register-btn flex items-center justify-center gap-2 hover:scale-105 transition-transform"
+                        >
+                            REGISTER ON WEBSITE
+                        </a>
+                    ) : (
+                        <button
+                            className={`register-btn flex items-center justify-center gap-2 ${isRegistered ? 'bg-transparent text-cyan-400 border-cyan-400' : ''}`}
+                            onClick={handleRegister}
+                            disabled={isRegistering || isRegistered}
+                        >
+                            {isRegistering ? (
+                                <Loader2 className="w-4 h-4 animate-spin" />
+                            ) : isRegistered ? (
+                                <>
+                                    <span>REGISTERED</span>
+                                    <Check className="w-4 h-4" />
+                                </>
+                            ) : (
+                                user ? "REGISTER" : "LOGIN TO REGISTER"
+                            )}
+                        </button>
+                    )}
                     <span className="mobile-swipe-hint text-xs text-gray-500 mt-2">Swipe down to close</span>
                 </div>
             </div>
