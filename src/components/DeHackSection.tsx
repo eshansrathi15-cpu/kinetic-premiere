@@ -257,7 +257,7 @@ const DeHackSection = () => {
               </div>
               <div className="flex items-center gap-2 px-3 py-2 bg-secondary/30">
                 <DollarSign className="w-5 h-5 text-primary" />
-                <span className="text-foreground font-mono text-sm uppercase">₹ Prizes</span>
+                <span className="text-foreground font-mono text-sm uppercase">$$$</span>
               </div>
             </div>
             <div className="flex flex-wrap gap-4">
