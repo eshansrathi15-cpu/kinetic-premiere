@@ -187,7 +187,7 @@ const TicketPopup = ({ isOpen, onClose, event }: TicketPopupProps) => {
                             rel="noopener noreferrer"
                             className="register-btn flex items-center justify-center gap-2 hover:scale-105 transition-transform"
                         >
-                            REGISTER ON WEBSITE
+                            LINK
                         </a>
                     ) : (
                         <button

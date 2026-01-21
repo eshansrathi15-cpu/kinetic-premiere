@@ -224,20 +224,31 @@ const Tickets = () => {
                   >
                     <Info className="w-4 h-4 mr-2" /> LEARN_MORE
                   </Button>
-                  <Button
-                    onClick={() => handleRegisterClick(event.name)}
-                    className={`w-full md:w-auto font-bold uppercase py-5 px-8 tracking-widest transition-transform shadow-[0_0_20px_rgba(147,245,255,0.2)] text-sm ${isRegistered
-                      ? 'bg-green-500 text-white hover:bg-green-600'
-                      : 'bg-primary text-black hover:scale-105'
-                      }`}
-                    disabled={isRegistered || isCheckingStatus}
-                  >
-                    {isRegistered ? (
-                      <span className="flex items-center gap-2"><Check className="w-5 h-5" /> REGISTERED</span>
-                    ) : (
-                      'REGISTER_NOW'
-                    )}
-                  </Button>
+                  {event.name === "WHAT DA FUKREY" || event.name === "MISSION:POSSIBLE?" ? (
+                    <a
+                      href={event.name === "WHAT DA FUKREY" ? "#" : "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full md:w-auto font-bold uppercase py-5 px-8 tracking-widest transition-transform shadow-[0_0_20px_rgba(147,245,255,0.2)] text-sm bg-primary text-black hover:scale-105 inline-flex items-center justify-center"
+                    >
+                      LINK
+                    </a>
+                  ) : (
+                    <Button
+                      onClick={() => handleRegisterClick(event.name)}
+                      className={`w-full md:w-auto font-bold uppercase py-5 px-8 tracking-widest transition-transform shadow-[0_0_20px_rgba(147,245,255,0.2)] text-sm ${isRegistered
+                        ? 'bg-green-500 text-white hover:bg-green-600'
+                        : 'bg-primary text-black hover:scale-105'
+                        }`}
+                      disabled={isRegistered || isCheckingStatus}
+                    >
+                      {isRegistered ? (
+                        <span className="flex items-center gap-2"><Check className="w-5 h-5" /> REGISTERED</span>
+                      ) : (
+                        'REGISTER_NOW'
+                      )}
+                    </Button>
+                  )}
                 </div>
               </motion.div>
             );
