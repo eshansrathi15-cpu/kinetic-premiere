@@ -5,21 +5,17 @@ import { Link } from 'react-router-dom';
 
 const events = [
   { date: 'JAN 21', title: 'REGISTRATIONS OPEN', scene: 'SCENE 01' },
-  { date: 'JAN 28', title: 'MISSION:POSSIBLE? SUBMISSIONS BEGIN', scene: 'SCENE 02', slug: 'dehack' },
-  { date: 'JAN 28', title: 'BEDROCK RECRUITMENT TASK BEGINS', scene: 'SCENE 03', slug: 'bedrock' },
-  { date: 'JAN 31', title: 'WHAT DA FUKREY', scene: 'SCENE 04' },
-  { date: 'FEB 02', title: 'MISSION:POSSIBLE? CROWDFUNDING BEGINS', scene: 'SCENE 05', slug: 'dehack' },
-  { date: 'FEB 02', title: 'BEDROCK RECRUITMENT TASK SUBMISSION EOD', scene: 'SCENE 06', slug: 'bedrock' },
-  { date: 'FEB 02', title: 'CAREER FAIR INTERVIEWS BEGIN', scene: 'SCENE 07' },
-  { date: 'FEB 03', title: 'ONE RED PAPERCLIP', scene: 'SCENE 08', slug: 'dehack' },
-  { date: 'FEB 04', title: 'WOLF OF DALAL STREET', scene: 'SCENE 09', slug: 'dehack' },
-  { date: 'FEB 04', title: 'DEHACK', scene: 'SCENE 10', slug: 'dehack' },
-  { date: 'FEB 06', title: 'HOW TO TRAIN YOUR DELIVERY TEAM', scene: 'SCENE 11', slug: 'dehack' },
-  { date: 'FEB 06', title: 'MOVIE NIGHT', scene: 'SCENE 12' },
-  { date: 'FEB 06', title: 'BEDROCK AUCTION', scene: 'SCENE 13', slug: 'bedrock' },
-  { date: 'FEB 07', title: 'MISIRLOU', scene: 'SCENE 14', slug: 'dehack' },
-  { date: 'FEB 07', title: 'DEHACK SUBMISSIONS', scene: 'SCENE 15', slug: 'dehack' },
-  { date: 'FEB 08', title: 'BEDROCK', description: '', scene: 'SCENE 16', slug: 'bedrock' },
+  { date: 'JAN 31', title: 'WHAT DA FUKREY', scene: 'SCENE 02' },
+  { date: 'FEB 02', title: 'CAREER FAIR INTERVIEWS', scene: 'SCENE 03' },
+  { date: 'FEB 03', title: 'ONE RED PAPERCLIP', scene: 'SCENE 04', slug: 'dehack' },
+  { date: 'FEB 04', title: 'WOLF OF DALAL STREET', scene: 'SCENE 05', slug: 'dehack' },
+  { date: 'FEB 04', title: 'DEHACK', scene: 'SCENE 06', slug: 'dehack' },
+  { date: 'FEB 06', title: 'HOW TO TRAIN YOUR DELIVERY TEAM', scene: 'SCENE 07', slug: 'dehack' },
+  { date: 'FEB 06', title: 'MOVIE SCREENING', scene: 'SCENE 08' },
+  { date: 'FEB 06', title: 'BEDROCK AUCTION', scene: 'SCENE 09', slug: 'bedrock' },
+  { date: 'FEB 07', title: 'MISIRLOU', scene: 'SCENE 10', slug: 'dehack' },
+  { date: 'FEB 07', title: 'DEHACK SUBMISSIONS', scene: 'SCENE 11', slug: 'dehack' },
+  { date: 'FEB 08', title: 'BEDROCK', scene: 'SCENE 12', slug: 'bedrock' },
 ];
 
 const TimelineSection = () => {
@@ -74,7 +70,7 @@ const TimelineSection = () => {
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 15, // Reduced from 30 to 15 for a faster scroll
+                duration: 60, 
                 ease: "linear",
               },
             }}
@@ -120,12 +116,12 @@ const TimelineSection = () => {
                     </div>
 
                     <div>
-                      <p className="text-muted-foreground text-sm">{event.description}</p>
+                      <p className="text-muted-foreground text-sm"></p>
                       {/* Film frame number */}
                       <div className="mt-3 flex items-center gap-2">
                         <div className={`h-px flex-1 ${activeIndex === index ? 'bg-primary/50' : 'bg-border'}`} />
                         <span className="text-[10px] font-mono text-muted-foreground">
-                          {String(index + 1).padStart(2, '0')}/16
+                          {String(index + 1).padStart(2, '0')}/{events.length}
                         </span>
                       </div>
                     </div>
