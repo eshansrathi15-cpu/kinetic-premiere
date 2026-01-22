@@ -12,7 +12,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 
 
 const EVENT_DETAILS: Record<string, { description: string; prize: string }> = {
-  "MISSION:POSSIBLE?": {
+  "MISSION: POSSIBLE?": {
     description: "Suggest solutions to problems. You decide what the problem is. ANC cats bothering you? No Diet Coke in your vendi? Pitch your solutions and raise real capital from the student body.",
     prize: "TBA"
   },
@@ -24,7 +24,7 @@ const EVENT_DETAILS: Record<string, { description: string; prize: string }> = {
     description: "Take over ANC & Looters to master logistics and operations! Optimize delivery routes, manage resources and team up for maximum sales!",
     prize: "TBA"
   },
-  "MISIRLOU : A KNIVES OUT MYSTERY": {
+  "MISIRLOU: A KNIVES OUT MYSTERY": {
     description: "Challenge yourself to a fusion of two classic events on campus—an escape room and a treasure hunt—but with a twist. The slowest team will be eliminated each round. Make your escape before time runs out.",
     prize: "TBA"
   },
@@ -71,11 +71,11 @@ const Tickets = () => {
 
 
   const events = [
-    { id: 1, name: "MISSION:POSSIBLE?", type: "Crowdfunding", prize: "$$$" },
+    { id: 1, name: "MISSION: POSSIBLE?", type: "Crowdfunding", prize: "$$$" },
     { id: 2, name: "WHAT DA FUKREY", type: "Online Game", prize: "$$$" },
     { id: 3, name: "WOLF OF DALAL STREET", type: "Trading Sim", prize: "$$$" },
     { id: 4, name: "HOW TO TRAIN YOUR DELIVERY TEAM", type: "Ops Challenge", prize: "$$$" },
-    { id: 5, name: "MISIRLOU : A KNIVES OUT MYSTERY", type: "Exploration", prize: "$$$" },
+    { id: 5, name: "MISIRLOU: A KNIVES OUT MYSTERY", type: "Exploration", prize: "$$$" },
     { id: 6, name: "ONE RED PAPERCLIP", type: "Logistics Challenge", date: "", prize: "$$$" },
   ];
 
@@ -224,7 +224,7 @@ const Tickets = () => {
                   >
                     <Info className="w-4 h-4 mr-2" /> LEARN_MORE
                   </Button>
-                  {event.name === "WHAT DA FUKREY" || event.name === "MISSION:POSSIBLE?" ? (
+                  {event.name === "WHAT DA FUKREY" || event.name === "MISSION: POSSIBLE?" ? (
                     <a
                       href={event.name === "WHAT DA FUKREY" ? "#" : "#"}
                       target="_blank"
