@@ -184,10 +184,9 @@ const TicketPopup = ({ isOpen, onClose, event }: TicketPopupProps) => {
 
                     {event.name === "WHAT DA FUKREY" || event.name === "MISSION: POSSIBLE?" ? (
                         <a
-                            href={event.name === "WHAT DA FUKREY" ? "#" : "#"}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="register-btn flex items-center justify-center gap-2 hover:scale-105 transition-transform"
+                            href="javascript:void(0)"
+                            onClick={(e) => e.preventDefault()}
+                            className="register-btn flex items-center justify-center gap-2 hover:scale-105 transition-transform cursor-pointer"
                         >
                             LINK
                         </a>

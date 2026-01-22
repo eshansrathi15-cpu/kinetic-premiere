@@ -226,10 +226,9 @@ const Tickets = () => {
                   </Button>
                   {event.name === "WHAT DA FUKREY" || event.name === "MISSION: POSSIBLE?" ? (
                     <a
-                      href={event.name === "WHAT DA FUKREY" ? "#" : "#"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full md:w-auto font-bold uppercase py-5 px-8 tracking-widest transition-transform shadow-[0_0_20px_rgba(147,245,255,0.2)] text-sm bg-primary text-black hover:scale-105 inline-flex items-center justify-center"
+                      href="javascript:void(0)"
+                      onClick={(e) => e.preventDefault()}
+                      className="w-full md:w-auto font-bold uppercase py-5 px-8 tracking-widest transition-transform shadow-[0_0_20px_rgba(147,245,255,0.2)] text-sm bg-primary text-black hover:scale-105 inline-flex items-center justify-center cursor-pointer"
                     >
                       LINK
                     </a>
