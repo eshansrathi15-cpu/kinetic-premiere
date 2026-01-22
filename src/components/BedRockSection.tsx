@@ -210,7 +210,7 @@ const BedRockSection = () => {
 
             <div className="grid grid-cols-3 gap-4 mb-10 text-center">
               {[{ icon: Users, label: 'TEAMS', value: '14' },
-              { icon: TrendingUp, label: 'MONETARY', value: '10X REVENUE' },
+              { icon: TrendingUp, label: 'REVENUE', value: '10X' },
               { icon: Crown, label: 'CHAMPION', value: '1' }
               ].map((stat, i) => (
                 <div key={i} className="p-4 border border-primary/20 bg-primary/5 hover:border-primary/50 transition-colors">
