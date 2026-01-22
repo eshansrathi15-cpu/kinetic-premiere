@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Clapperboard } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 const events = [
   { date: 'JAN 21', title: 'REGISTRATIONS OPEN', scene: 'SCENE 01' },
@@ -77,57 +76,56 @@ const TimelineSection = () => {
             className="flex gap-0 py-1 bg-secondary/20 w-max cursor-grab active:cursor-grabbing"
           >
             {events.map((event, index) => (
-              <Link to={`/events/${event.slug}`} key={index}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  className={`flex-shrink-0 w-64 md:w-80 transition-all duration-300 ${activeIndex === index ? 'scale-105 z-10' : 'opacity-70 hover:opacity-100'
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                onMouseEnter={() => setActiveIndex(index)}
+                className={`flex-shrink-0 w-64 md:w-80 transition-all duration-300 ${activeIndex === index ? 'scale-105 z-10' : 'opacity-70 hover:opacity-100'
+                  }`}
+              >
+                <div
+                  className={`border-2 p-6 h-52 flex flex-col justify-between transition-all duration-300 relative ${activeIndex === index
+                    ? 'border-primary bg-primary/5'
+                    : 'border-foreground/50 bg-background'
                     }`}
                 >
-                  <div
-                    className={`border-2 p-6 h-52 flex flex-col justify-between transition-all duration-300 relative ${activeIndex === index
-                      ? 'border-primary bg-primary/5'
-                      : 'border-foreground/50 bg-background'
-                      }`}
-                  >
-                    {/* Scene number - film style */}
-                    <div className="absolute top-2 right-2">
-                      <span className={`text-[10px] font-mono ${activeIndex === index ? 'text-primary' : 'text-muted-foreground'}`}>
-                        {event.scene}
-                      </span>
-                    </div>
+                  {/* Scene number - film style */}
+                  <div className="absolute top-2 right-2">
+                    <span className={`text-[10px] font-mono ${activeIndex === index ? 'text-primary' : 'text-muted-foreground'}`}>
+                      {event.scene}
+                    </span>
+                  </div>
 
-                    <div>
-                      <span
-                        className={`font-mono text-sm ${activeIndex === index ? 'text-primary' : 'text-muted-foreground'
-                          }`}
-                      >
-                        {event.date}
-                      </span>
-                      <h3
-                        className={`font-mono text-2xl font-bold mt-2 ${activeIndex === index ? 'text-primary' : 'text-foreground'
-                          }`}
-                      >
-                        {event.title}
-                      </h3>
-                    </div>
+                  <div>
+                    <span
+                      className={`font-mono text-sm ${activeIndex === index ? 'text-primary' : 'text-muted-foreground'
+                        }`}
+                    >
+                      {event.date}
+                    </span>
+                    <h3
+                      className={`font-mono text-2xl font-bold mt-2 ${activeIndex === index ? 'text-primary' : 'text-foreground'
+                        }`}
+                    >
+                      {event.title}
+                    </h3>
+                  </div>
 
-                    <div>
-                      <p className="text-muted-foreground text-sm"></p>
-                      {/* Film frame number */}
-                      <div className="mt-3 flex items-center gap-2">
-                        <div className={`h-px flex-1 ${activeIndex === index ? 'bg-primary/50' : 'bg-border'}`} />
-                        <span className="text-[10px] font-mono text-muted-foreground">
-                          {String(index + 1).padStart(2, '0')}/{events.length}
-                        </span>
-                      </div>
+                  <div>
+                    <p className="text-muted-foreground text-sm"></p>
+                    {/* Film frame number */}
+                    <div className="mt-3 flex items-center gap-2">
+                      <div className={`h-px flex-1 ${activeIndex === index ? 'bg-primary/50' : 'bg-border'}`} />
+                      <span className="text-[10px] font-mono text-muted-foreground">
+                        {String(index + 1).padStart(2, '0')}/{events.length}
+                      </span>
                     </div>
                   </div>
-                </motion.div>
-              </Link>
+                </div>
+              </motion.div>
             ))}
           </motion.div>
 
