@@ -61,7 +61,7 @@ const EventsGrid = ({ onEventClick }: EventsGridProps) => {
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-mono font-bold mt-2 text-foreground group-hover:text-primary-foreground transition-colors">
+                  <h3 className="text-2xl font-mono font-bold mt-2 text-foreground group-hover:text-primary-foreground transition-colors pr-12">
                     {event.name}
                   </h3>
                 </div>
