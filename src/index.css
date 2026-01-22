@@ -496,7 +496,7 @@
     left: 0;
     width: 100%;
     height: auto;
-    max-height: 55vh;
+    max-height: 70vh;
     overflow-y: auto;
 
     /* Mobile: Only cut top corners */
@@ -510,8 +510,8 @@
 
     flex-direction: column;
     animation: slideUp 0.3s ease-out;
-    padding: 12px;
-    padding-bottom: max(env(safe-area-inset-bottom), 12px);
+    padding: 16px;
+    padding-bottom: max(env(safe-area-inset-bottom), 16px);
   }
 
   .ticket-rip-line {
