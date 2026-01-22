@@ -36,15 +36,16 @@ className="mb-6 font-mono text-primary hover:text-primary hover:bg-primary/10 tr
 </h2>
 </div>
 {/* Video Player Frame */}
-<div className="relative aspect-video w-full h-auto md:h-[75vh] border-4 border-primary/20 bg-black rounded-lg overflow-hidden shadow-[0_0_50px_rgba(var(--primary-rgb),0.2)]">
-<iframe
-className="absolute inset-0 w-full h-full"
-src="https://www.instagram.com/reel/DTx8rfWiBAE/embed?autoplay=1" 
-title="E-Week 2026 Trailer"
-frameBorder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-allowFullScreen
-></iframe>
+<div className="relative w-full h-[75vh] border-4 border-primary/20 bg-black rounded-lg overflow-hidden shadow-[0_0_50px_rgba(var(--primary-rgb),0.2)] flex items-center justify-center">
+  <video
+    className="w-full h-full object-contain"
+    controls
+    autoPlay
+    playsInline
+  >
+    <source src="/Trailer (1).mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 </div>
 {/* Tech Specs Footer */}
 <div className="mt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 opacity-50">
