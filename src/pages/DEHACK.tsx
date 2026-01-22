@@ -125,7 +125,7 @@ const Dehack = () => {
     }
   };
   const dehackTimeline = [{
-    date: "1st February",
+    date: "22nd January",
     task: "Registration Begins & Website goes live",
     status: "LAUNCH"
   }, {
@@ -276,7 +276,7 @@ const Dehack = () => {
             <div className="text-primary mb-4"><Zap /></div>
             <h4 className="text-foreground font-mono font-bold uppercase mb-2 tracking-tight">Dehack Website</h4>
             <p className="text-xs text-muted-foreground font-sans uppercase tracking-widest">Status: PENDING_MANIFEST...</p>
-            <p className="text-sm text-muted-foreground mt-4">Find out about Dehack here.</p>
+            <p className="text-sm text-muted-foreground mt-4">Coming soon!</p>
           </div>
         </div>
       </motion.div>
