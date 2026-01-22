@@ -13,10 +13,10 @@ const ClapperOverlay = ({ isVisible, text }: ClapperOverlayProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.5 } }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-xl pointer-events-none"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md md:backdrop-blur-xl pointer-events-none"
         >
           <div className="relative transform scale-125">
-             {/* Clapper Top Part (Moving Arm) */}
+            {/* Clapper Top Part (Moving Arm) */}
             <motion.div
               initial={{ rotate: -45, originX: 0, originY: 1 }}
               animate={{ rotate: 0 }}
@@ -27,7 +27,7 @@ const ClapperOverlay = ({ isVisible, text }: ClapperOverlayProps) => {
                 <div key={i} className="w-12 h-full bg-white -skew-x-[45deg] ml-4" />
               ))}
             </motion.div>
-            
+
             {/* Clapper Bottom Part (Static) */}
             <div className="w-80 h-56 bg-black border-4 border-white p-6 flex flex-col justify-between shadow-[0_0_60px_rgba(147,245,255,0.3)]">
               <div className="flex justify-between font-mono text-white text-[10px] uppercase tracking-widest opacity-80">

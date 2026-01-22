@@ -16,10 +16,11 @@ const WaveformBackground = () => {
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const animationRef = useRef<number>();
 
-  const GRID_SIZE = 60;
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const GRID_SIZE = isMobile ? 80 : 60;
   const PERSPECTIVE = 0.4;
-  const INFLUENCE_RADIUS = 200;
-  const MAX_LIFT = 40;
+  const INFLUENCE_RADIUS = isMobile ? 150 : 200;
+  const MAX_LIFT = isMobile ? 30 : 40;
   const SPRING_TENSION = 0.08;
   const DAMPING = 0.85;
 
@@ -93,7 +94,7 @@ const WaveformBackground = () => {
 
   const draw = useCallback((ctx: CanvasRenderingContext2D, width: number, height: number) => {
     ctx.clearRect(0, 0, width, height);
-    
+
     const tiles = tilesRef.current;
     const cols = Math.ceil(width / GRID_SIZE) + 4;
 
@@ -105,17 +106,17 @@ const WaveformBackground = () => {
 
       // Calculate glow intensity based on Z height
       const glowIntensity = Math.min(tile.z / MAX_LIFT, 1);
-      
+
       // Interpolate color from dark gray to electric cyan (#7DF9FF)
       const r = Math.round(42 + (125 - 42) * glowIntensity);
       const g = Math.round(42 + (249 - 42) * glowIntensity);
       const b = Math.round(42 + (255 - 42) * glowIntensity);
-      
+
       ctx.strokeStyle = `rgb(${r}, ${g}, ${b})`;
       ctx.lineWidth = glowIntensity > 0.1 ? 1.5 + glowIntensity : 1;
 
-      // Add glow effect for lifted tiles
-      if (glowIntensity > 0.1) {
+      // Add glow effect for lifted tiles (disabled on mobile for performance)
+      if (!isMobile && glowIntensity > 0.1) {
         ctx.shadowColor = `rgba(125, 249, 255, ${glowIntensity * 0.8})`;
         ctx.shadowBlur = 10 * glowIntensity;
       } else {
