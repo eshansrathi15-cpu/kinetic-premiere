@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Ticket } from 'lucide-react';
 
 const events = [
-  { name: 'HOW TO TRAIN YOUR DELIVERY TEAM', desc: 'Take over ANC & Looters!', rating: 'PG', category: 'EVENT' },
+  { name: 'HOW TO TRAIN YOUR DELIVERY TEAM', desc: '"Turns out all we needed was a little more of ANC & Looters delivery" - Stoic The Vast', rating: 'PG', category: 'EVENT' },
   { name: 'WHAT DA FUKREY', desc: 'Tired of your wingies? Sell them. Join the community here, no regstrations required!', rating: 'G', category: 'EVENT' },
   { name: 'WOLF OF DALAL STREET', desc: 'Build your company, bet on the IPO!', rating: 'PG', category: 'EVENT' },
   { name: 'MISIRLOU : A KNIVES OUT MYSTERY', desc: '"Misirlou: a melody that seems chaotically complex, but in reality, it is just one string vibrating in panic." - Vincent Vega', rating: 'G', category: 'EVENT' },
