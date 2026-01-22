@@ -44,7 +44,7 @@ className="mb-6 font-mono text-primary hover:text-primary hover:bg-primary/10 tr
     muted        // REQUIRED for autoplay to work
     playsInline  // REQUIRED for autoplay on iPhones
   >
-    <source src="/trailer.mp4" type="video/mp4" />
+    <source src="/Trailer (1).mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 </div>
