@@ -84,7 +84,7 @@ const HeroSection = () => {
           <div className="ticket-perf w-3 h-16 bg-primary" />
           <div className="bg-primary text-primary-foreground px-8 py-4 font-mono relative">
             <div className="text-xs opacity-70 mb-1">Theater Timing </div>
-            <div className="text-xl md:text-2xl font-bold tracking-wider">FEB 02 - 09</div>
+            <div className="text-xl md:text-2xl font-bold tracking-wider">FEB 02 - 08</div>
             <div className="text-xs opacity-70 mt-1">BITS PILANI</div>
           </div>
           <div className="ticket-perf w-3 h-16 bg-primary" />
