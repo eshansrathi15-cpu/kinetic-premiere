@@ -34,6 +34,9 @@ const TicketPopup = ({ isOpen, onClose, event }: TicketPopupProps) => {
                         setIsRegistered(true);
                         document.body.style.overflow = 'hidden';
                         return;
+                    } else {
+                        // Important: Reset to false if this event is NOT in the cached list
+                        setIsRegistered(false);
                     }
                 }
 
@@ -68,6 +71,9 @@ const TicketPopup = ({ isOpen, onClose, event }: TicketPopupProps) => {
         };
 
         if (isOpen) {
+            // Reset registration status immediately when popup opens
+            // This prevents showing stale state from previously viewed events
+            setIsRegistered(false);
             document.body.style.overflow = 'hidden';
             checkRegistration();
         } else {
