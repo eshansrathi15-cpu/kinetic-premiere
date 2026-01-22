@@ -125,7 +125,7 @@ const Dehack = () => {
     }
   };
   const dehackTimeline = [{
-    date: "1st February",
+    date: "22nd January",
     task: "Registration Begins & Website goes live",
     status: "LAUNCH"
   }, {
@@ -211,7 +211,7 @@ const Dehack = () => {
               <Trophy size={120} />
             </div>
             <p className="text-primary font-mono text-xs uppercase tracking-[0.3em] mb-2 font-bold">TOTAL_STAKES</p>
-            <h2 className="text-5xl md:text-7xl font-mono font-black text-foreground tracking-tighter">$$$<span className="text-primary">+</span>
+            <h2 className="text-5xl md:text-7xl font-mono font-black text-foreground tracking-tighter">$$$<span className="text-primary"></span>
             </h2>
             <p className="text-muted-foreground font-mono text-sm mt-2">Plus Incubation Opportunities, Cash Prizes.</p>
           </motion.div>
@@ -276,7 +276,7 @@ const Dehack = () => {
             <div className="text-primary mb-4"><Zap /></div>
             <h4 className="text-foreground font-mono font-bold uppercase mb-2 tracking-tight">Dehack Website</h4>
             <p className="text-xs text-muted-foreground font-sans uppercase tracking-widest">Status: PENDING_MANIFEST...</p>
-            <p className="text-sm text-muted-foreground mt-4">Find out about Dehack here.</p>
+            <p className="text-sm text-muted-foreground mt-4">Coming soon!</p>
           </div>
         </div>
       </motion.div>

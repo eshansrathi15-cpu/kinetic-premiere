@@ -194,12 +194,12 @@ const BedrockPage = () => {
                         BED<span className="text-primary">ROCK</span>
                     </h1>
                     <p className="text-xl md:text-2xl text-muted-foreground mb-10 font-sans leading-relaxed">
-                        The C'Not Takeover. 13 teams. One goal: Absolute Market Dominance.
+                        The iconic C'Not Takeover. 14 teams. One goal: Absolute Market Dominance.
                     </p>
                     <div className="grid grid-cols-3 gap-4 pt-8 border-t border-primary/20 text-center">
                         <div className="border border-primary/20 p-4 bg-secondary/10">
                             <Users className="w-5 h-5 text-primary mx-auto mb-2" />
-                            <span className="text-2xl font-bold block text-foreground tracking-tighter">13</span>
+                            <span className="text-2xl font-bold block text-foreground tracking-tighter">14</span>
                             <span className="text-[10px] text-muted-foreground uppercase tracking-widest">Elite_Teams</span>
                         </div>
                         <div className="border border-primary/20 p-4 bg-secondary/10">
@@ -209,7 +209,7 @@ const BedrockPage = () => {
                         </div>
                         <div className="border border-primary/20 p-4 bg-primary/10">
                             <Award className="w-5 h-5 text-primary mx-auto mb-2" />
-                            <span className="text-2xl font-bold block text-foreground tracking-tighter">₹20K+</span>
+                            <span className="text-2xl font-bold block text-foreground tracking-tighter">$$$</span>
                             <span className="text-[10px] text-muted-foreground uppercase tracking-widest">Grand_Prize</span>
                         </div>
                     </div>
@@ -282,9 +282,9 @@ const BedrockPage = () => {
                             with the marketing just to clock in the maximum revenue.
                         </p>
                         <p className="text-lg md:text-xl">
-                            Apart from a tonne of fun, memories and laughter, you stand a chance to win a cash prize of{" "}
+                            Apart from a tonne of fun, memories and laughter, you stand a chance to win a{" "}
                             <span className="inline-block px-4 py-2 bg-primary text-black font-bold text-2xl md:text-3xl tracking-tight border-2 border-primary animate-pulse">
-                                ₹20,000/-
+                              CASH PRIZE!  
                             </span>
                             {" "}
                             <span className="text-primary font-bold">You C'not miss this!</span>
