@@ -2,12 +2,12 @@ import { motion } from 'framer-motion';
 import { Ticket } from 'lucide-react';
 
 const events = [
-  { name: 'HOW TO TRAIN YOUR  DELIVERY TEAM', desc: '"Turns out all we needed was a little more of ANC & Looters delivery" - Stoic The Vast', rating: 'PG', category: 'EVENT' },
-  { name: 'WHAT DA FUKREY', desc: '"Gau Wing hai... bilkul gau. Isliye beechne aaye hai. Isse Déjà vu nahi... Déjà-Choo kehte hain." - Choocha', rating: 'G', category: 'EVENT' },
-  { name: 'WOLF OF DALAL STREET', desc: '"Profit dikhta hai toh har koi jhukta hai. Toh banao profit yaha pe." - Harshad Mehta', rating: 'PG', category: 'EVENT' },
-  { name: 'MISIRLOU: A KNIVES OUT MYSTERY', desc: '"Misirlou: a melody that seems chaotically complex, but in reality, it is just one string vibrating in panic. Just like this blend of Pulp and Blanc" - Vincent Vega', rating: 'G', category: 'EVENT' },
-  { name: 'MISSION: POSSIBLE?', desc: '"Your mission should you choose to accept it, is to raise capital to fund your solutions to campus problems." - Ethan Hunt', rating: 'R', category: 'EVENT' },
-  { name: 'ONE RED PAPERCLIP', desc: '"I\'m gonna make him an offer he can\'t refuse. Watch me trade this paperclip into something magnificent right here" - Don Corleone', rating: 'G', category: 'EVENT' },
+  { name: 'HOW TO TRAIN YOUR  DELIVERY TEAM', desc: 'Take over ANC & Looters to master logistics and operations! Optimize delivery routes, manage resources and team up for maximum sales!', rating: 'PG', category: 'EVENT' },
+  { name: 'WHAT DA FUKREY', desc: 'Tired of your wingies? Sell them. Navigate the ultimate trading challenge where strategy meets negotiation in this high-stakes marketplace.', rating: 'G', category: 'EVENT' },
+  { name: 'WOLF OF DALAL STREET', desc: 'Durex making diapers? Prove you can pitch the impossible and snag a spot in our very own stock market. Market your stocks, trash-talk competitors and trade in E-bucks to bag the highest IPO! Test your market instincts and skill in this intense simulation.', rating: 'PG', category: 'EVENT' },
+  { name: 'MISIRLOU: A KNIVES OUT MYSTERY', desc: '"Challenge yourself to a fusion of two classic events on campus—an escape room and a treasure hunt—but with a twist. The slowest team will be eliminated each round. Make your escape before time runs out.', rating: 'G', category: 'EVENT' },
+  { name: 'MISSION: POSSIBLE?', desc: 'Suggest solutions to problems. You decide what the problem is. ANC cats bothering you? No Diet Coke in your vendi? Pitch your solutions and raise real capital from the student body.', rating: 'R', category: 'EVENT' },
+  { name: 'ONE RED PAPERCLIP', desc: 'One lone paperclip, infinite possibilities. Trade your way up and prove that the ultimate prize is just a few deals away. How far can you go?', rating: 'G', category: 'EVENT' },
 ];
 
 interface EventsGridProps {
