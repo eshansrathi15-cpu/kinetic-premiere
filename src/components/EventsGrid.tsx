@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Ticket } from 'lucide-react';
 
 const events = [
-  { name: 'HOW TO TRAIN YOUR  DELIVERY TEAM', desc: 'Take over ANC & Looters to master logistics and operations! Optimize delivery routes, manage resources and team up for maximum sales!', rating: 'PG', category: 'EVENT' },
+  { name: 'HOW TO TRAIN YOUR DELIVERY TEAM', desc: 'Take over ANC & Looters to master logistics and operations! Optimize delivery routes, manage resources and team up for maximum sales!', rating: 'PG', category: 'EVENT' },
   { name: 'WHAT DA FUKREY', desc: 'Tired of your wingies? Sell them. Navigate the ultimate trading challenge where strategy meets negotiation in this high-stakes marketplace.', rating: 'G', category: 'EVENT' },
   { name: 'WOLF OF DALAL STREET', desc: 'Durex making diapers? Prove you can pitch the impossible and snag a spot in our very own stock market. Market your stocks, trash-talk competitors and trade in E-bucks to bag the highest IPO! Test your market instincts and skill in this intense simulation.', rating: 'PG', category: 'EVENT' },
   { name: 'MISIRLOU: A KNIVES OUT MYSTERY', desc: '"Challenge yourself to a fusion of two classic events on campus—an escape room and a treasure hunt—but with a twist. The slowest team will be eliminated each round. Make your escape before time runs out.', rating: 'G', category: 'EVENT' },
